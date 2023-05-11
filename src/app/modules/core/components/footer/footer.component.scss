@@ -1,0 +1,9 @@
+@import '../../../../../scss/variables.scss';
+
+.footer {
+  background-color: $bg-color-blue-opacity;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5em 0;
+}

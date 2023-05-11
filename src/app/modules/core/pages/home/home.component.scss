@@ -1,0 +1,24 @@
+@import '../../../../../scss/variables.scss';
+
+.home {
+  background-color: $bg-color-blue-opacity;
+  text-align: center;
+  width: 50%;
+  margin: 3em auto;
+  padding: 3em;
+  border-radius: 15px;
+
+  &-title {
+    font-size: 32px;
+  }
+
+  &-description {
+    margin: 1em 0;
+    line-height: 25px;
+  }
+  &-img {
+    width: 600px;
+    height: 300px;
+    border-radius: 15px;
+  }
+}
