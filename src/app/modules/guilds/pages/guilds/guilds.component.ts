@@ -6,22 +6,22 @@ import { IGuild, IGuildMembers } from '../../interfaces/IGuild';
   templateUrl: './guilds.component.html',
   styleUrls: ['./guilds.component.scss']
 })
+
 export class GuildsComponent  {
 
   guild: IGuild | undefined;
   isLoading: boolean | undefined;
-  guildMembers: IGuildMembers[] | undefined
+  guildMembers: IGuildMembers[] | undefined;
 
   guildData(data: IGuild): void {
     this.guild = data
-  }
+  };
 
   isLoadingEvent(loader: boolean): void {
     this.isLoading = loader
-  }
+  };
 
   getGuildMembers(data: IGuildMembers[]): void {
     this.guildMembers = data
-  }
-
+  };
 }
