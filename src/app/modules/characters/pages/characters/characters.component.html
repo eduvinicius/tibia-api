@@ -1,0 +1,16 @@
+<section class="character">
+  <h1 class="character-title">Personagens do Tibia</h1>
+  <p class="character-description">
+    Nesta seção você pode verificar os status dos jogadores do Tibia
+  </p>
+  <app-search-character-form
+    (character)="characterData($event)"
+    (isLoading)="isLoadingEvent($event)"
+    >
+  </app-search-character-form>
+  <app-character-table
+    [character]="character"
+    [isLoading]="isLoading"
+    >
+  </app-character-table>
+</section>

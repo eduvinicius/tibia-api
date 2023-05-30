@@ -1,0 +1,12 @@
+<form (ngSubmit)="submitForm()" class="guild-search-form">
+  <label for="search" class="guild-search-form-label">Guilda:</label>
+  <input
+    type="text"
+    class="guild-search-form-input"
+    placeholder="Pesquise a Guilda"
+    id="search"
+    name="search"
+    [(ngModel)]="searchGuild"
+  >
+  <input type="submit" class="guild-search-form-submit">
+</form>

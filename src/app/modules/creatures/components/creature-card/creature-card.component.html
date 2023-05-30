@@ -1,0 +1,45 @@
+<section class="creature-search">
+  <app-loader class="creature-search-loader" *ngIf="isLoading"></app-loader>
+  <div class="creature-search-card" *ngIf="creature && creature.creature.name; else elseBlock">
+    <img class="creature-search-card-img" src="{{creature.creature.image_url}}" alt="">
+    <h3 class="creature-search-card-title">
+      <span class="creature-search-card-span">Nome:</span> {{ creature.creature.name }}
+    </h3>
+    <div class="creature-search-card-description">
+      <p>
+        <span class="creature-search-card-span">Descrição:</span> {{ creature.creature.description }}
+      </p>
+    </div>
+    <ul class="creature-search-card-behavior">
+      <li>
+        <span class="creature-search-card-span">Imunidade:</span> {{ formatList(creature.creature.immune) }}
+      </li>
+      <li>
+        <span class="creature-search-card-span">Forte contra:</span> {{ formatList(creature.creature.strong) }}
+      </li>
+      <li>
+        <span class="creature-search-card-span">Fraqueza: </span> {{ formatList(creature.creature.weakness) }}
+      </li>
+    </ul>
+    <p class="creature-search-card-hp">
+      <fa-icon class="creature-search-card-icon creature-search-card-icon-heart"
+        [icon]="faHeart">
+      </fa-icon>
+      <span class="creature-search-card-span">HP:</span> {{ creature.creature.hitpoints }}
+    </p>
+    <p class="creature-search-card-exp">
+      <fa-icon class="creature-search-card-icon" [icon]="faHatWizard"></fa-icon>
+      <span class="creature-search-card-span">Pontos de Experiência:</span> {{ creature.creature.experience_points }}
+    </p>
+    <p class="creature-search-card-loot">
+      <fa-icon class="creature-search-card-icon" [icon]="faBox"></fa-icon>
+      <span class="creature-search-card-span">Loot:</span> {{ formatList(creature.creature.loot_list) }}
+    </p>
+  </div>
+  <ng-template #elseBlock>
+    <div *ngIf="creature && !creature.creature.name ">
+      <h1 class="else-title" >Não existe uma criatura com este nome!</h1>
+    </div>
+  </ng-template>
+</section>
+

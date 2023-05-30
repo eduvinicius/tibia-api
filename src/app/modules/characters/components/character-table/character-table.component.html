@@ -1,0 +1,24 @@
+<section class="character">
+  <app-loader *ngIf="isLoading"></app-loader>
+  <table class="character-table" *ngIf="character && character.character.name; else elseBlock">
+    <caption class="character-table-title">Informações do Personagem</caption>
+    <tbody class="character-table-body">
+      <tr><td>Nome</td><td>{{ character.character.name }}</td></tr>
+      <tr><td>Sexo</td><td>{{ character.character.sex }}</td></tr>
+      <tr><td>Vocação</td><td>{{ character.character.vocation }}</td></tr>
+      <tr><td>Nível</td><td>{{ character.character.level }}</td></tr>
+      <tr><td>Pontos de Conquista</td><td>{{ character.character.achievement_points }}</td></tr>
+      <tr><td>Mundo</td><td>{{ character.character.world }}</td></tr>
+      <tr><td>Residência</td><td>{{ character.character.residence }}</td></tr>
+      <tr><td>Último login</td><td>{{ formatData(character.character.last_login) }}</td></tr>
+      <tr><td>Status da Conta</td><td>{{ character.character.account_status }}</td></tr>
+      <tr><td>Comentário</td><td>{{ hasComment(character.character.comment) }}</td></tr>
+      <tr><td>Criação</td><td>{{ formatData(character.account_information.created) }}</td></tr>
+    </tbody>
+  </table>
+  <ng-template #elseBlock>
+    <div *ngIf="character && !character.character.name">
+      <h1>Não há um personagem com este nome!</h1>
+    </div>
+  </ng-template>
+</section>

@@ -1,4 +1,6 @@
-export interface CreaturesAPI {
+import { IBaseInformation } from "../../../Interfaces/IBaseInformation"
+
+export interface ICreatures extends IBaseInformation {
   creatures: {
     boosted: {
       featured: boolean,
@@ -15,13 +17,9 @@ export interface CreaturesAPI {
       }
     ]
   },
-  information: {
-    api_version: number,
-    timestamp: string
-  }
 }
 
-export interface CreatureList {
+export interface ICreaturesList {
   featured: boolean,
   image_url: string,
   name: string,

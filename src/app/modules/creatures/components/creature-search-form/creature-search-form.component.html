@@ -1,0 +1,13 @@
+<form (ngSubmit)="submitForm()" class="creature-search-form">
+  <label for="search" class="creature-search-form-label">Criatura:</label>
+  <input
+    type="text"
+    class="creature-search-form-input"
+    placeholder="Pesquise a criatura"
+    id="search"
+    name="search"
+    [(ngModel)]="searchCreature"
+  >
+  <input type="submit" class="creature-search-form-submit">
+</form>
+

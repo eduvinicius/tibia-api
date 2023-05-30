@@ -1,0 +1,47 @@
+@import '../../../../../scss/variables.scss';
+
+.character {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-table {
+    border: 2px solid;
+    width: 500px;
+    padding: .5em;
+    box-shadow: 0px 2px 5px $box-shadow-brown;
+    border: 15px solid;
+    border-image-source: url('../../../../../assets/images/title-background-green.gif');
+    border-image-slice: 10;
+    border-image-repeat: round;
+
+    &-title {
+      font-size: 25px;
+      margin-bottom: .4em;
+    }
+
+    &-body {
+
+     tr:nth-child(even) {
+      background-color: $color-light-brown;
+     }
+
+      td {
+        padding: .3em;
+        border: 1px solid;
+      }
+    }
+
+  }
+}
+
+@media (max-width: 700px) {
+
+  .character {
+
+    &-table {
+      width: 330px;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import '../../../../../scss/variables.scss';
+
+.world-table {
+  width: 70em;
+  padding: 1em .5em;
+  border: 10px solid;
+  border-image-source: url('../../../../../assets/images/title-background-green.gif');
+  border-image-slice: 10;
+  border-image-repeat: round;
+  border-spacing: 2px;
+
+  &-title {
+    margin: 1em 0;
+  }
+
+  &-body {
+
+    &-data {
+      text-align: center;
+
+      &:nth-child(even) {
+      background-color: $color-light-brown;
+      }
+    }
+  }
+}

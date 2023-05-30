@@ -1,12 +1,17 @@
 @import '../../../../../scss/variables.scss';
 
 .home {
-  background-color: $bg-color-blue-opacity;
+  background-color: $color-dark-brown;
+  border: 8px solid;
+  border-radius: 15px;
+  border-image-source: url('../../../../../assets/images/newsheadline_background.gif');
+  border-image-slice: 10;
+  border-image-repeat: round;
   text-align: center;
   width: 50%;
   margin: 3em auto;
   padding: 3em;
-  border-radius: 15px;
+  color: $color-white;
 
   &-title {
     font-size: 32px;
@@ -16,9 +21,30 @@
     margin: 1em 0;
     line-height: 25px;
   }
+
   &-img {
     width: 600px;
     height: 300px;
     border-radius: 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  .home {
+    text-align: center;
+    width: 60%;
+
+    &-img {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 701px) {
+  .home {
+
+    &-img {
+      width: 400px;
+    }
   }
 }

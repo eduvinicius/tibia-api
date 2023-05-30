@@ -1,0 +1,23 @@
+<app-loader class="loader" *ngIf="isLoading"></app-loader>
+<section class="guild-card" *ngIf="guild && guild.guilds.guild.name; else elseBlock">
+  <img src="{{ guild.guilds.guild.logo_url }}" alt="" class="guild-card-img">
+  <h3 class="guild-card-name">{{ guild.guilds.guild.name }}</h3>
+  <h4 class="guild-card-world">Mundo: {{ guild.guilds.guild.world }}</h4>
+  <h4 class="guild-card-title-description">Descrição:</h4>
+  <div class="guild-card-container-description">
+    <p class="guild-card-container-description-desc">
+      {{ guild.guilds.guild.description }}
+    </p>
+  </div>
+  <p class="guild-card-date">Data de Criação: {{ formatDate(guild.guilds.guild.founded) }} </p>
+  <p class="guild-card-players-online">Jogadores Online: {{ guild.guilds.guild.players_online }} </p>
+  <p class="guild-card-players-offline">Jogadores Offline: {{ guild.guilds.guild.players_offline }} </p>
+  <p class="guild-card-total-members">Total de membros: {{ guild.guilds.guild.members_total }} </p>
+</section>
+
+<ng-template #elseBlock>
+  <div class="else-block" *ngIf="guild && !guild.guilds.guild.name ">
+    <h1>Não existe uma guilda com este nome</h1>
+  </div>
+</ng-template>
+

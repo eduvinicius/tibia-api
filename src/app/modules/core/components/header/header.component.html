@@ -1,35 +1,57 @@
 <header class="header">
-  <div class="header-logo-title">
-    <img class="header-img" src="../../../../../assets/images/logotibia.png" alt="Logo Site" />
-    <h1 class="header-title">TIBIA API</h1>
+  <div class="header-logo">
+    <img class="header-logo-img" src="../../../../../assets/images/logotibia.png" alt="Logo Site" />
+    <h1 class="header-logo-title">TIBIA API</h1>
   </div>
-  <div class="header-nav">
+
+  <nav class="header-nav">
     <p class="header-nav-item">
-      <a href="" class="header-nav-item-link" routerLink="/inicio">Início</a>
+      <a routerLink="/inicio">Início</a>
     </p>
-    <input type="checkbox" id="header-nav-checkbox" class="header-nav-checkbox">
-    <label for="header-nav-checkbox">
-      <p class="header-nav-item">Categorias</p>
-    </label>
-    <ul class="header-nav-list">
-      <li class="header-nav-list-item">
-        <a class="header-nav-list-link" href="">Criaturas</a>
+
+    <div class="header-nav-dropdown">
+      <button class="header-nav-dropdown-btn" (click)="toggleDropdown()">Categorias</button>
+      <ul class="header-nav-dropdown-list" [hidden]="!isOpen">
+        <li class="header-nav-dropdown-list-item">
+          <a class="header-nav-dropdown-list-link" routerLink="/criaturas">Criaturas</a>
+        </li>
+        <li class="header-nav-dropdown-list-item">
+          <a class="header-nav-dropdown-list-link" routerLink="/personagens">Personagens</a>
+        </li>
+        <li class="header-nav-dropdown-list-item">
+          <a class="header-nav-dropdown-list-link" routerLink="/guildas">Guildas</a>
+        </li>
+        <li class="header-nav-dropdown-list-item">
+          <a class="header-nav-dropdown-list-link" routerLink="/mundos">Mundos</a>
+        </li>
+      </ul>
+    </div>
+    <p class="header-nav-item">
+     <a href="" class="header-nav-item-link" routerLink="/sobre">Sobre</a>
+    </p>
+  </nav>
+
+  <nav class="header-burguer">
+      <button class="header-burguer-btn" (click)="toggleBurguer()"></button>
+    <ul class="header-burguer-list" [hidden]="!isOpenBurguer">
+      <li class="header-burguer-list-item">
+        <a class="header-burguer-list-link" routerLink="/inicio">Início</a>
       </li>
-      <li class="header-nav-list-item">
-        <a class="header-nav-list-link" href="">Bosses</a>
+      <li class="header-burguer-list-item">
+        <a class="header-burguer-list-link" routerLink="/criaturas">Criaturas</a>
       </li>
-      <li class="header-nav-list-item">
-        <a class="header-nav-list-link" href="">Personagens</a>
+      <li class="header-burguer-list-item">
+        <a class="header-burguer-list-link" routerLink="/personagens">Jogadores</a>
       </li>
-      <li class="header-nav-list-item">
-        <a class="header-nav-list-link" href="">Guildas</a>
+      <li class="header-burguer-list-item">
+        <a class="header-burguer-list-link" routerLink="/guildas">Guildas</a>
       </li>
-      <li class="header-nav-list-item">
-        <a class="header-nav-list-link" href="">Mundos</a>
+      <li class="header-burguer-list-item">
+        <a class="header-burguer-list-link" routerLink="/mundos">Mundos</a>
+      </li>
+      <li class="header-burguer-list-item">
+        <a class="header-burguer-list-link" routerLink="/sobre">Sobre</a>
       </li>
     </ul>
-    <p class="header-nav-item">
-     <a href="" class="header-nav-item-link">Sobre</a>
-    </p>
-  </div>
+  </nav>
 </header>

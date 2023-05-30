@@ -1,0 +1,17 @@
+<table class="online-players" *ngIf="worldDetails">
+  <caption class="online-players-title">Jogadores Online</caption>
+  <tbody class="online-players-body">
+    <tr>
+      <th>Nome</th>
+      <th>Nível</th>
+      <th>Vocação</th>
+    </tr>
+    <tr class="online-players-body-data" *ngFor="let character of worldDetails.world.online_players">
+      <a routerLink="/personagens/detalhes/{{ character.name }}">
+        <td>{{ character.name }}</td>
+      </a>
+      <td>{{ character.level }}</td>
+      <td>{{ character.vocation }}</td>
+    </tr>
+  </tbody>
+</table>

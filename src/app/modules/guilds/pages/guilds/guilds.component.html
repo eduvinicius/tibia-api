@@ -1,0 +1,21 @@
+<section class="guild">
+  <h1 class="guild-title">Guildas</h1>
+  <p class="guild-description">
+    Nesta seção, você poderá pesquisar pelas guildas existentes no Tibia
+  </p>
+  <app-guild-search-form
+   (guild)="guildData($event)"
+   (guildMembers)="getGuildMembers($event)"
+   (isLoading)="isLoadingEvent($event)"
+   >
+  </app-guild-search-form>
+  <app-guild-card
+    [guild]="guild"
+    [isLoading]="isLoading"
+    >
+  </app-guild-card>
+  <app-guild-member-card
+    [guildMembers]="guildMembers"
+    >
+  </app-guild-member-card>
+</section>

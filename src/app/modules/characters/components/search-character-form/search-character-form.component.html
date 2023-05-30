@@ -1,0 +1,12 @@
+<form class="character-search-form" (ngSubmit)="submitForm()">
+  <label for="search" class="character-search-form-label">Personagem:</label>
+  <input
+    type="text"
+    class="character-search-form-input"
+    placeholder="Digite o nome"
+    id="search"
+    name="search"
+    [(ngModel)]="searchChar"
+  >
+  <input type="submit" class="character-search-form-submit">
+</form>
