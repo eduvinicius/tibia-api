@@ -8,6 +8,7 @@ import { IWorldDetails, IWorldsDetails } from '../../interfaces/IWorldDetails';
   templateUrl: './world-details.component.html',
   styleUrls: ['./world-details.component.scss']
 })
+
 export class WorldDetailsComponent implements OnInit {
 
   constructor(
@@ -24,28 +25,28 @@ export class WorldDetailsComponent implements OnInit {
       this.world = params['id']
     })
     this.fetchWorldData()
-  }
+  };
 
   fetchWorldData() {
-    this.isLoading = true
+    this.isLoading = true;
     this.worldService.getWorldByName(this.world).subscribe({
       next: (data: IWorldsDetails) => {
-        this.worldDetails = data.worlds
+        this.worldDetails = data.worlds;
         this.isLoading = false;
       },
       error: (error) => {
-        console.log(error)
+        console.log(error);
         this.isLoading = false;
       }
-    })
-  }
+    });
+  };
 
   formatArray(arr: string[]) {
     return arr.join(', ')
-  }
+  };
 
   formatData(date: string) {
     const newDate = new Date(date);
     return newDate.toLocaleDateString('pt-BR')
-  }
+  };
 }

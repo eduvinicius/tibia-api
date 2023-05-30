@@ -7,17 +7,26 @@ import { IRegularWorlds, IWorlds } from '../../interfaces/IWorlds';
   templateUrl: './worlds.component.html',
   styleUrls: ['./worlds.component.scss']
 })
+
 export class WorldsComponent implements OnInit {
 
 
   constructor(private worldService: WorldsService) {}
 
   worlds: IRegularWorlds[] = []
+  isLoading: boolean | undefined;
 
   ngOnInit(): void {
-    this.worldService.getWorlds().subscribe((world: IWorlds) => {
-      this.worlds = world.worlds.regular_worlds
-    })
-  }
-
+    this.isLoading = true;
+    this.worldService.getWorlds().subscribe({
+     next: (world: IWorlds) => {
+        this.worlds = world.worlds.regular_worlds;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+        this.isLoading = false;
+      }
+    });
+  };
 }

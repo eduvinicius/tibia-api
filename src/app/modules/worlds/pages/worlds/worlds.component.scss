@@ -1,9 +1,15 @@
 
-
 .worlds {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 32px;
   height: 400vh;
-  margin-top: 2em;
+}
+
+@media (max-width: 700px) {
+
+  .worlds {
+    height: auto;
+  }
 }

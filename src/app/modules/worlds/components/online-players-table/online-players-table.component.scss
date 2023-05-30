@@ -27,3 +27,25 @@
     }
   }
 }
+
+@media (max-width: 700px) {
+
+  .online-players {
+    width: 360px;
+    border: 7px solid;
+    border-image-source: url('../../../../../assets/images/title-background-green.gif');
+    border-image-slice: 10;
+    border-image-repeat: round;
+
+    &-body {
+
+      &-data {
+        text-align: center;
+
+        &:nth-child(even) {
+        background-color: $color-light-brown;
+        }
+      }
+    }
+  }
+}

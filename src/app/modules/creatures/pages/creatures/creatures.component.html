@@ -10,7 +10,7 @@
       <a routerLink="/criaturas/bosses" class="creatures-link">Clique aqui!</a>
     </p>
     <app-loader *ngIf="isLoading"></app-loader>
-    <app-creatures-list [visibleCreatures]="visibleCreatures"></app-creatures-list>
+    <app-creatures-list *ngIf="!isLoading" [visibleCreatures]="visibleCreatures"></app-creatures-list>
     <app-button [btnTitle]="btnTitle" (click)="loadNextChunk()"></app-button>
 </section>
 

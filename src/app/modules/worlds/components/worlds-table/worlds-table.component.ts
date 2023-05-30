@@ -9,5 +9,6 @@ import { IRegularWorlds } from '../../interfaces/IWorlds';
 export class WorldsTableComponent {
 
   @Input() worlds: IRegularWorlds[] = [];
+  @Input() isLoading: boolean | undefined;
 
 }
