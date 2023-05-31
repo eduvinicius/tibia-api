@@ -14,7 +14,7 @@ export class CharacterTableComponent  {
 
  formatData(data: string): string {
   const newData: Date = new Date(data);
-  return newData.toLocaleString("pt-BR")
+  return newData.toLocaleDateString("pt-BR")
  };
 
  hasComment(comment: string): string {

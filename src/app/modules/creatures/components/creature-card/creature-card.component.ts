@@ -22,7 +22,6 @@ export class CreatureCardComponent {
     }
   };
 
-
   faHeart: IconDefinition = faHeart;
   faHatWizard: IconDefinition = faHatWizard;
   faBox: IconDefinition = faBox;

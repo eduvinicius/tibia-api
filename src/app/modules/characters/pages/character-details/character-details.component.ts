@@ -42,14 +42,4 @@ export class CharacterDetailsComponent implements OnInit {
       }
     })
   }
-
-  formatData(data: string): string {
-    const newData: Date = new Date(data);
-    return newData.toLocaleString("pt-BR")
-   }
-
-   hasComment(comment: string): string {
-    return comment ? comment : comment = 'Não há comentário'
-   }
-
 }

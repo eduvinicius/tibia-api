@@ -11,14 +11,26 @@
       </p>
     </div>
     <ul class="creature-search-card-behavior">
-      <li>
-        <span class="creature-search-card-span">Imunidade:</span> {{ formatList(creature.creature.immune) }}
+      <li *ngIf="creature.creature.immune !== null && creature.creature.immune.length > 0">
+        <span
+          class="creature-search-card-span">
+          Imunidade:
+        </span>
+        {{ formatList(creature.creature.immune) }}
       </li>
-      <li>
-        <span class="creature-search-card-span">Forte contra:</span> {{ formatList(creature.creature.strong) }}
+      <li *ngIf="creature.creature.strong !== null && creature.creature.strong.length > 0">
+        <span
+          class="creature-search-card-span">
+          Forte contra:
+        </span>
+        {{ formatList(creature.creature.strong) }}
       </li>
-      <li>
-        <span class="creature-search-card-span">Fraqueza: </span> {{ formatList(creature.creature.weakness) }}
+      <li *ngIf="creature.creature.weakness !== null && creature.creature.weakness.length > 0">
+        <span
+          class="creature-search-card-span">
+          Fraqueza:
+        </span>
+        {{ formatList(creature.creature.weakness) }}
       </li>
     </ul>
     <p class="creature-search-card-hp">
