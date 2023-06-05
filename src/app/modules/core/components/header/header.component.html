@@ -13,16 +13,16 @@
       <button class="header-nav-dropdown-btn" (click)="toggleDropdown()">Categorias</button>
       <ul class="header-nav-dropdown-list" [hidden]="!isOpen">
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/criaturas">Criaturas</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/criaturas" (click)="toggleDropdown()">Criaturas</a>
         </li>
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/personagens">Personagens</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/personagens" (click)="toggleDropdown()">Personagens</a>
         </li>
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/guildas">Guildas</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/guildas" (click)="toggleDropdown()">Guildas</a>
         </li>
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/mundos">Mundos</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/mundos" (click)="toggleDropdown()">Mundos</a>
         </li>
       </ul>
     </div>
