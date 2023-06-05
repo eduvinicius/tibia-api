@@ -13,21 +13,21 @@
       <button class="header-nav-dropdown-btn" (click)="toggleDropdown()">Categorias</button>
       <ul class="header-nav-dropdown-list" [hidden]="!isOpen">
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/criaturas" (click)="toggleDropdown()">Criaturas</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/criaturas"(click)="toggleDropdown()">Criaturas</a>
         </li>
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/personagens" (click)="toggleDropdown()">Personagens</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/personagens"(click)="toggleDropdown()">Personagens</a>
         </li>
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/guildas" (click)="toggleDropdown()">Guildas</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/guildas"(click)="toggleDropdown()">Guildas</a>
         </li>
         <li class="header-nav-dropdown-list-item">
-          <a class="header-nav-dropdown-list-link" routerLink="/mundos" (click)="toggleDropdown()">Mundos</a>
+          <a class="header-nav-dropdown-list-link" routerLink="/mundos"(click)="toggleDropdown()">Mundos</a>
         </li>
       </ul>
     </div>
     <p class="header-nav-item">
-     <a href="" class="header-nav-item-link" routerLink="/sobre">Sobre</a>
+     <a href="" class="header-nav-item-link" routerLink="/sobre" (click)="toggleDropdown()">Sobre</a>
     </p>
   </nav>
 
@@ -35,22 +35,22 @@
       <button class="header-burguer-btn" (click)="toggleBurguer()"></button>
     <ul class="header-burguer-list" [hidden]="!isOpenBurguer">
       <li class="header-burguer-list-item">
-        <a class="header-burguer-list-link" routerLink="/inicio">Início</a>
+        <a class="header-burguer-list-link" routerLink="/inicio" (click)="toggleBurguer()">Início</a>
       </li>
       <li class="header-burguer-list-item">
-        <a class="header-burguer-list-link" routerLink="/criaturas">Criaturas</a>
+        <a class="header-burguer-list-link" routerLink="/criaturas" (click)="toggleBurguer()">Criaturas</a>
       </li>
       <li class="header-burguer-list-item">
-        <a class="header-burguer-list-link" routerLink="/personagens">Jogadores</a>
+        <a class="header-burguer-list-link" routerLink="/personagens" (click)="toggleBurguer()">Jogadores</a>
       </li>
       <li class="header-burguer-list-item">
-        <a class="header-burguer-list-link" routerLink="/guildas">Guildas</a>
+        <a class="header-burguer-list-link" routerLink="/guildas" (click)="toggleBurguer()">Guildas</a>
       </li>
       <li class="header-burguer-list-item">
-        <a class="header-burguer-list-link" routerLink="/mundos">Mundos</a>
+        <a class="header-burguer-list-link" routerLink="/mundos" (click)="toggleBurguer()">Mundos</a>
       </li>
       <li class="header-burguer-list-item">
-        <a class="header-burguer-list-link" routerLink="/sobre">Sobre</a>
+        <a class="header-burguer-list-link" routerLink="/sobre" (click)="toggleBurguer()">Sobre</a>
       </li>
     </ul>
   </nav>
