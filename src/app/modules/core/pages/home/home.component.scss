@@ -9,8 +9,8 @@
   border-image-repeat: round;
   text-align: center;
   width: 50%;
-  margin: 3em auto;
-  padding: 3em;
+  margin: 2em auto;
+  padding: 2em;
   color: $color-white;
 
   &-title {
@@ -33,6 +33,7 @@
   .home {
     text-align: center;
     width: 60%;
+    margin-bottom: 80px;
 
     &-img {
       display: none;
@@ -42,9 +43,39 @@
 
 @media (max-width: 1000px) and (min-width: 701px) {
   .home {
+    width: 80%;
+    padding: 32px;
+    margin: 57px auto;
 
     &-img {
-      width: 400px;
+      width: 500px;
+      height: 500px;
     }
   }
+}
+
+@media (max-width: 3000px) and (min-width: 2000px) {
+
+  .home {
+    width: 80%;
+    padding: 24px;
+    height: 600px;
+    margin: 8em auto 9em auto;
+    &-img {
+      width: 900px;
+      height: 330px;
+    }
+
+    &-title {
+      font-size: 48px;
+    }
+
+    &-description {
+      margin: 1em 0;
+      font-size: 20px;
+      line-height: 25px;
+    }
+  }
+
+
 }

@@ -1,8 +1,12 @@
 @import '../../../../../scss/variables.scss';
 
 .bosses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  height: 100vh;
+  height: 75vh;
 
   &-title {
     color: $color-dark-brown;
@@ -52,6 +56,7 @@
 @media (max-width: 700px) {
 
   .bosses {
+    height: 100vh;
 
     &-list {
       width: 90%;
@@ -74,10 +79,11 @@
 @media (max-width: 1000px) and (min-width: 701px) {
 
   .bosses {
-
+    row-gap: 60px;
+    height: 82vh;
     &-list {
       width: 90%;
-      height: 800px;
+      height: 900px;
       overflow: auto;
       border: 7px solid;
       border-image-source: url('../../../../../assets/images/newsheadline_background.gif');

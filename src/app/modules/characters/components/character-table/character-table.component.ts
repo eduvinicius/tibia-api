@@ -13,8 +13,13 @@ export class CharacterTableComponent  {
  @Input() isLoading: boolean | undefined;
 
  formatData(data: string): string {
-  const newData: Date = new Date(data);
-  return newData.toLocaleDateString("pt-BR")
+
+  if ( data !== undefined ) {
+    const newData: Date = new Date(data);
+    return newData.toLocaleDateString("pt-BR")
+  }
+
+    return 'Não foi encontrado uma data'
  };
 
  hasComment(comment: string): string {

@@ -10,7 +10,7 @@
   border-image-slice: 10;
   border-image-repeat: round;
   width: 90vw;
-  height: 110vh;
+  height: 80vh;
   margin: 2em auto;
   border-radius: 15px;
   color: $color-dark-brown;
@@ -36,6 +36,23 @@
     border-image-repeat: round;
     text-align: center;
     overflow-y: auto;
+  }
+}
+
+
+@media (max-width: 1000px) and (min-width: 701px) {
+
+  .creature-search {
+
+    height: 75vh;
+  }
+}
+
+@media (max-width: 3000px) and (min-width: 2000px) {
+
+  .creature-search {
+
+    height: 75vh;
   }
 
 }
