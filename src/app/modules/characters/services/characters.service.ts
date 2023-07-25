@@ -11,7 +11,7 @@ export class CharactersService {
 
   constructor(private http: HttpClient) { }
 
-  URLapiChar = environment.apiURLCharacter;
+  URLapiChar: string = environment.apiURLCharacter;
 
   getCharByName(name: string): Observable<ICharacterData> {
     return this.http.get<ICharacterData>(`${this.URLapiChar}${name}`)

@@ -22,9 +22,9 @@ export class GuildSearchFormComponent {
       next: (data: IGuild) => {
         const members: IGuildMembers[] = data.guilds.guild.members;
         members.sort((memberA, memberB) => {
-          if (memberA.status === "online" && memberB.status === "offline") {
+          if (memberA.status.toLowerCase() === "online" && memberB.status.toLowerCase() === "offline") {
             return -1; // memberA vem antes de memberB
-          } else if (memberA.status === "offline" && memberB.status === "online") {
+          } else if (memberA.status.toLowerCase() === "offline" && memberB.status.toLowerCase() === "online") {
             return 1; // memberA vem depois de memberB
           } else {
             return 0; // manter a ordem atual

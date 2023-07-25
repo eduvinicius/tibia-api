@@ -18,7 +18,7 @@ export class CharactersComponent  {
     this.character = data
   };
 
-  isLoadingEvent(loader: boolean) {
+  isLoadingEvent(loader: boolean): void {
     this.isLoading = loader
   };
 }

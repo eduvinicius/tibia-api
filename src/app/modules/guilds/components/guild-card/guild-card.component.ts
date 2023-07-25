@@ -11,7 +11,7 @@ export class GuildCardComponent {
   @Input() guild: IGuild | undefined;
   @Input() isLoading: boolean | undefined;
 
-  formatDate(date: string) {
+  formatDate(date: string): string {
     const newDate = new Date(date)
     return newDate.toLocaleDateString('pt-BR')
   }

@@ -41,11 +41,11 @@ export class WorldDetailsComponent implements OnInit {
     });
   };
 
-  formatArray(arr: string[]) {
+  formatArray(arr: string[]): string {
     return arr.join(', ')
   };
 
-  formatData(date: string) {
+  formatData(date: string): string {
     const newDate = new Date(date);
     return newDate.toLocaleDateString('pt-BR')
   };
