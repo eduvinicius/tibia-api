@@ -9,8 +9,8 @@
     >
   </app-creature-search-form>
   <app-creature-card
-    [creature]="creature"
-    [isLoading]="isLoading"
+    [creature]="creature | async"
+    [isLoading]="isLoading | async"
     >
   </app-creature-card>
 </section>

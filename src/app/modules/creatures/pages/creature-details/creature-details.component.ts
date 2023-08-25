@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CreaturesService } from '../../services/creatures.service';
-import { ICreature } from '../../interfaces/ICreature';
+import { ICreatureModel } from '../../interfaces/ICreature';
+import { CreatureMapper } from '../../mappers/creatureMapper';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -17,28 +19,32 @@ export class CreatureDetailsComponent implements OnInit {
     private creatureService: CreaturesService
     ) { }
 
-    race: string = '';
-    creature: ICreature | undefined;
-    isLoading: boolean = false;
+    private _race: string = '';
+    public creature: ICreatureModel | undefined;
+    public isLoading = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.race =  params['id']
+      this._race =  params['id']
     })
-    this.fetchCreatureData()
+    this.getCreatureByRace()
   };
 
-  fetchCreatureData() {
-    this.isLoading = true;
-    this.creatureService.getCreatureByRace(this.race).subscribe({
-      next: (data: ICreature) => {
-        this.creature = data;
-        this.isLoading = false;
+  getCreatureByRace() {
+    this.isLoading.next(true);
+    this.creatureService.getCreatureByRace(this._race).subscribe({
+      next: (data: ICreatureModel) => {
+        this.handleCreatureData(data)
       },
       error: (error) => {
         console.log(error);
-        this.isLoading = false;
+        this.isLoading.next(false);
       }
     });
   };
+
+  handleCreatureData(data:ICreatureModel) {
+    this.creature = data
+    this.isLoading.next(false);
+  }
 }

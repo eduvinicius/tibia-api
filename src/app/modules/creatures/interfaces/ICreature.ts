@@ -1,6 +1,6 @@
 import { IBaseInformation } from "../../../Interfaces/IBaseInformation";
 
-export interface ICreature extends IBaseInformation {
+export interface ICreatureResponseDTO extends IBaseInformation {
   creature: {
     name: string;
     race: string;
@@ -23,4 +23,16 @@ export interface ICreature extends IBaseInformation {
     loot_list: string[];
     featured: boolean;
   };
+}
+
+export interface ICreatureModel {
+  name: string;
+  image: string;
+  description: string;
+  immune: string[];
+  strong: string[];
+  weakness: string[];
+  hitpoints: number;
+  experiencePoints: number;
+  lootList: string[];
 }

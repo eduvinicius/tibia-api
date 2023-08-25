@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICreature } from '../../interfaces/ICreature';
+import { ICreatureModel } from '../../interfaces/ICreature';
 import { IconDefinition, faHeart, faHatWizard, faBox } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -10,19 +10,18 @@ import { IconDefinition, faHeart, faHatWizard, faBox } from '@fortawesome/free-s
 })
 
 export class CreatureCardComponent {
-  @Input() creature: ICreature | undefined;
-  @Input() isLoading: boolean | undefined;
+  @Input() creature: ICreatureModel | undefined | null;
+  @Input() isLoading: boolean | undefined | null;
+  public faHeart: IconDefinition = faHeart;
+  public faHatWizard: IconDefinition = faHatWizard;
+  public faBox: IconDefinition = faBox;
 
-  formatList(list: string[]) {
+  formatList(list: string[]): string {
     if ( list !== null) {
-      const formattedList = list.map(string => string.charAt(0).toUpperCase() + string.slice(1));
+      const formattedList: string[] = list.map(string => string.charAt(0).toUpperCase() + string.slice(1));
       return formattedList.join(', ');
     } else {
       return list
     }
   };
-
-  faHeart: IconDefinition = faHeart;
-  faHatWizard: IconDefinition = faHatWizard;
-  faBox: IconDefinition = faBox;
 }

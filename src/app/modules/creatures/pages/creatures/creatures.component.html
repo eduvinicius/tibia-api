@@ -9,9 +9,14 @@
       Caso queira visualizar uma lista de bosses,
       <a routerLink="/criaturas/bosses" class="creatures-link">Clique aqui!</a>
     </p>
-    <app-loader *ngIf="isLoading"></app-loader>
-    <app-creatures-list *ngIf="!isLoading" [visibleCreatures]="visibleCreatures"></app-creatures-list>
-    <app-button [btnTitle]="btnTitle" (click)="loadNextChunk()"></app-button>
+    <p class="creatures-paragraph">Número de criaturas na lista: {{ visibleCreatures.value.length }}</p>
+    <app-loader *ngIf="(isLoading | async)"></app-loader>
+    <app-creatures-list
+      *ngIf="!(isLoading | async)"
+      [visibleCreatures]="visibleCreatures | async"
+    >
+    </app-creatures-list>
+    <app-button [btnTitle]="btnTitle" (click)="loadNextPageOfCreatures()"></app-button>
 </section>
 
 

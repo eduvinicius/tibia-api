@@ -1,6 +1,6 @@
 import { IBaseInformation } from "../../../Interfaces/IBaseInformation"
 
-export interface ICreatures extends IBaseInformation {
+export interface ICreaturesResponseDTO extends IBaseInformation {
   creatures: {
     boosted: {
       featured: boolean,
@@ -19,9 +19,15 @@ export interface ICreatures extends IBaseInformation {
   },
 }
 
-export interface ICreaturesList {
+export interface ICreaturesListResponseDTO {
   featured: boolean,
   image_url: string,
+  name: string,
+  race: string
+}
+
+export interface ICreaturesListModel {
+  image: string,
   name: string,
   race: string
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ICharacter } from '../../interfaces/ICharacters';
+import { ICharacterWebDTO } from '../../interfaces/ICharacters';
 
 @Component({
   selector: 'app-characters',
@@ -11,10 +11,10 @@ export class CharactersComponent  {
 
   constructor() {}
 
-  character: ICharacter | undefined;
-  isLoading: boolean | undefined;
+  public character: ICharacterWebDTO | undefined;
+  public isLoading: boolean | undefined;
 
-  characterData(data: ICharacter): void {
+  characterData(data: ICharacterWebDTO): void {
     this.character = data
   };
 

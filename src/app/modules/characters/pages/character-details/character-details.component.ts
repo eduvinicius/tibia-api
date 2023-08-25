@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CharactersService } from '../../services/characters.service';
 
-import { ICharacter, ICharacterData } from '../../interfaces/ICharacters';
+import { ICharacterRequestDTO, ICharacterWebDTO } from '../../interfaces/ICharacters';
+import { CharacterMapper } from '../../mappers/characterMapper';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-character-details',
@@ -18,28 +20,34 @@ export class CharacterDetailsComponent implements OnInit {
     private characterService: CharactersService
   ) {}
 
-  character: ICharacter | undefined;
-  characterID: string = '';
-  isLoading: boolean | undefined;
+  private _characterMapper = new CharacterMapper();
+  public character: ICharacterWebDTO | undefined;
+  private _characterID: string = '';
+  public isLoading = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.characterID = params['id'];
+      this._characterID = params['id'];
     })
-    this.fetchCharacterData();
+    this.getCharacterById();
   }
 
-  fetchCharacterData() {
-    this.isLoading = true;
-    this.characterService.getCharByName(this.characterID).subscribe({
-      next: (data: ICharacterData) => {
-        this.character = data.characters
-        this.isLoading = false;
+  getCharacterById(): void {
+    this.isLoading.next(true)
+    this.characterService.getCharByName(this._characterID).subscribe({
+      next: (data: ICharacterRequestDTO) => {
+        this.handleCharacterData(data);
+        this.isLoading.next(false)
       },
       error: (error) => {
         console.log(error);
-        this.isLoading = false;
+        this.isLoading.next(false)
       }
     })
+  }
+
+  handleCharacterData(data: ICharacterRequestDTO): void {
+    const newData = this._characterMapper.mapTo(data);
+    this.character = newData
   }
 }

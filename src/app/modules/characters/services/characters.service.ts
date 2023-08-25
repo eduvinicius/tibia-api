@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ICharacterData } from '../interfaces/ICharacters';
+import { ICharacterRequestDTO } from '../interfaces/ICharacters';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class CharactersService {
 
   URLapiChar: string = environment.apiURLCharacter;
 
-  getCharByName(name: string): Observable<ICharacterData> {
-    return this.http.get<ICharacterData>(`${this.URLapiChar}${name}`)
+  getCharByName(name: string): Observable<ICharacterRequestDTO> {
+    return this.http.get<ICharacterRequestDTO>(`${this.URLapiChar}${name}`)
   }
 }

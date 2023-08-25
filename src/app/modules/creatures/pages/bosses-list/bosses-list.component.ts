@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IBosses, IBossesList } from '../../interfaces/IBossesList';
+import { IBossesRequestDTO, IBossesListWebDTO } from '../../interfaces/IBossesList';
 import { CreaturesService } from '../../services/creatures.service';
+import { BehaviorSubject } from 'rxjs';
+import { BossesListMapper } from '../../mappers/bossesListMapper';
 
 @Component({
   selector: 'app-bosses-list',
@@ -10,41 +12,47 @@ import { CreaturesService } from '../../services/creatures.service';
 
 export class BossesListComponent implements OnInit {
 
-  constructor(private creaturesService: CreaturesService) {}
+  constructor(private _creaturesService: CreaturesService) {}
 
-  bossesList: IBossesList[] = []
-  visibleData: IBossesList[] = []; // Dados visíveis no scroll
-  chunkSize = 10; // Quantidade de dados a serem exibidos por vez
-  currentPage = 1;
-  isLoading: boolean = false;
-  btnTitle: string = 'Ver mais';
+  private bossesMapper = new BossesListMapper();
+
+  private _bossesList: IBossesListWebDTO[] = [];
+  public visibleData: IBossesListWebDTO[] = []; // Dados visíveis no scroll
+  private _chunkSize = 10; // Quantidade de dados a serem exibidos por vez
+  private _currentPage = 1;
+  public isLoading = new BehaviorSubject<boolean>(false);
+  public btnTitle: string = 'Ver mais';
 
   ngOnInit(): void {
-    this.fetchBossesData();
+    this.getBossesListData();
   };
 
-  fetchBossesData() {
-    this.isLoading = true;
-    this.creaturesService.getBosses().subscribe({
-      next: (data: IBosses) => {
-        this.bossesList = data.boostable_bosses.boostable_boss_list;
-        this.loadNextChunk();
-        this.isLoading = false;
+  getBossesListData(): void {
+    this.isLoading.next(true)
+    this._creaturesService.getAllBosses().subscribe({
+      next: (data: IBossesRequestDTO) => {
+        this.handleBossesListData(data);
       },
       error: (error) => {
         console.log(error)
-        this.isLoading = false;
+        this.isLoading.next(false);
       }
     });
   };
 
+  handleBossesListData(data: IBossesRequestDTO): void {
+    const newData = data.boostable_bosses.boostable_boss_list
+    this._bossesList = this.bossesMapper.mapTo(newData)
+    this.loadNextChunk();
+    this.isLoading.next(false);
+  }
 
-  loadNextChunk() {
-    const startIndex = (this.currentPage - 1) * this.chunkSize;
-    const endIndex = startIndex + this.chunkSize;
-    if (startIndex < this.bossesList.length) {
-      this.visibleData = this.bossesList.slice(0, endIndex);
-      this.currentPage++;
+  loadNextChunk(): void {
+    const startIndex: number = (this._currentPage - 1) * this._chunkSize;
+    const endIndex: number = startIndex + this._chunkSize;
+    if (startIndex < this._bossesList.length) {
+      this.visibleData = this._bossesList.slice(0, endIndex);
+      this._currentPage++;
     };
   };
 }

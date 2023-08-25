@@ -1,6 +1,6 @@
 import { IBaseInformation } from "src/app/Interfaces/IBaseInformation";
 
-export interface ICharacterData extends IBaseInformation {
+export interface ICharacterRequestDTO extends IBaseInformation {
   characters: {
     character: {
       name: string;
@@ -78,4 +78,18 @@ export interface ICharacter {
     main: boolean;
     traded: boolean;
   }[];
+}
+
+export interface ICharacterWebDTO {
+  name: string;
+  sex: string;
+  vocation: string;
+  level: number;
+  achievement_points: number;
+  world: string;
+  residence: string;
+  last_login: string;
+  account_status: string;
+  comment: string;
+  created: string;
 }

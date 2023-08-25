@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ICreaturesList } from '../../interfaces/ICreaturesList';
-import { ICreature } from '../../interfaces/ICreature';
+import { ICreatureModel } from '../../interfaces/ICreature';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-creature-search',
@@ -12,15 +12,14 @@ export class CreatureSearchComponent  {
 
   constructor() {}
 
-  creaturesList: ICreaturesList[] = [];
-  creature: ICreature | undefined;
-  isLoading: boolean | undefined;
+  public creature = new Subject<ICreatureModel>;
+  public isLoading = new Subject<boolean>;
 
-  isLoadingEvent(loader: boolean) {
-    this.isLoading = loader;
+  isLoadingEvent(loader: boolean): void {
+    this.isLoading.next(loader);
   };
 
-  creatureData(data: ICreature): void {
-    this.creature = data;
+  creatureData(data: ICreatureModel): void {
+    this.creature.next(data)
   };
 }

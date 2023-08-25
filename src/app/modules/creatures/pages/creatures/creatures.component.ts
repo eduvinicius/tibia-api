@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ICreatures, ICreaturesList } from '../../interfaces/ICreaturesList';
+import { BehaviorSubject } from 'rxjs';
+import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 import { CreaturesService } from '../../services/creatures.service';
 
 @Component({
@@ -10,40 +11,49 @@ import { CreaturesService } from '../../services/creatures.service';
 
 export class CreaturesComponent implements OnInit {
 
-    constructor(private creaturesService: CreaturesService) {}
+    constructor(
+      private readonly _creaturesService: CreaturesService,
+    ) {}
 
-    creaturesList: ICreaturesList[] = [];
-    visibleCreatures: ICreaturesList[] = []; // Dados visíveis no scroll
-    chunkSize = 10; // Quantidade de dados a serem exibidos por vez
-    currentPage = 1;
-    isLoading: boolean = false;
-    btnTitle: string = 'Ver mais';
+    private readonly _creaturesList = new BehaviorSubject<ICreaturesListModel[]>([]);
+    public visibleCreatures = new BehaviorSubject<ICreaturesListModel[]>([]);
+
+    private readonly _chunkSize: number = 10;
+    private _currentPage: number = 1;
+
+    public isLoading = new BehaviorSubject<boolean>(false);
+    public btnTitle: string = 'Ver mais';
 
     ngOnInit(): void {
-      this.fetchCreatureData();
+      this.getCreaturesListData();
     };
 
-    fetchCreatureData() {
-      this.isLoading = true;
-      this.creaturesService.getCreatures().subscribe({
-        next: (data: ICreatures) => {
-          this.creaturesList = data.creatures.creature_list;
-          this.loadNextChunk();
-          this.isLoading = false;
+    getCreaturesListData(): void {
+      this.isLoading.next(true)
+      this._creaturesService.getAllCreatures().subscribe({
+        next: (creaturesData: ICreaturesListModel[]) => {
+          this.handleCreaturesData(creaturesData)
         },
-        error: (error) => {
+        error: (error: Error) => {
           console.log(error);
-          this.isLoading = false;
+          this.isLoading.next(false)
         }
       });
     };
 
-    loadNextChunk() {
-      const startIndex = (this.currentPage - 1) * this.chunkSize;
-      const endIndex = startIndex + this.chunkSize;
-      if (startIndex < this.creaturesList.length) {
-        this.visibleCreatures = this.creaturesList.slice(0, endIndex);
-        this.currentPage++;
+    handleCreaturesData(creaturesData: ICreaturesListModel[]): void {
+      this._creaturesList.next(creaturesData);
+      this.loadNextPageOfCreatures();
+      this.isLoading.next(false)
+    }
+
+    loadNextPageOfCreatures(): void {
+      const startIndex: number = (this._currentPage - 1) * this._chunkSize;
+      const endIndex: number = startIndex + this._chunkSize;
+      let creaturesList: ICreaturesListModel[] = this._creaturesList.value;
+      if (startIndex < creaturesList.length) {
+        this.visibleCreatures.next(creaturesList.slice(0, endIndex))
+        this._currentPage++;
       };
     };
 }

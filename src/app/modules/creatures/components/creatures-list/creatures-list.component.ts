@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICreaturesList } from '../../interfaces/ICreaturesList';
+import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 
 @Component({
   selector: 'app-creatures-list',
@@ -7,10 +7,5 @@ import { ICreaturesList } from '../../interfaces/ICreaturesList';
   styleUrls: ['./creatures-list.component.scss']
 })
 export class CreaturesListComponent {
-
-
-  isLoading: boolean = false;
-  @Input() visibleCreatures: ICreaturesList[] = [];
-
-
+  @Input() visibleCreatures: ICreaturesListModel[] | null = [];
 }

@@ -1,4 +1,4 @@
 <section class="creature-details" >
-  <app-loader *ngIf="isLoading"></app-loader>
+  <app-loader *ngIf="isLoading | async"></app-loader>
   <app-creature-card *ngIf="creature" [creature]="creature"></app-creature-card>
 </section>

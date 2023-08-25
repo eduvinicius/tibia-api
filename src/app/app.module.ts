@@ -4,6 +4,8 @@ import { CoreModule } from './modules/core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MyHttpInterceptor } from './modules/core/interceptors/http.interceptor';
 
 
 @NgModule({
@@ -15,7 +17,13 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     CoreModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
