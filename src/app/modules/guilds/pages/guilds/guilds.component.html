@@ -5,17 +5,20 @@
   </p>
   <app-guild-search-form
    (guild)="guildData($event)"
-   (guildMembers)="getGuildMembers($event)"
+   (guildMembers)="guildMembersData($event)"
    (isLoading)="isLoadingEvent($event)"
    >
   </app-guild-search-form>
   <app-guild-card
-    [guild]="guild"
+    [guildData]="guild"
     [isLoading]="isLoading"
     >
   </app-guild-card>
-  <app-guild-member-card
-    [guildMembers]="guildMembers"
-    >
-  </app-guild-member-card>
+  <ng-container *ngIf="guild | async as guild$">
+    <app-guild-member-card
+      *ngIf="guild$.active"
+      [guildMembers]="guildMembers"
+      >
+    </app-guild-member-card>
+  </ng-container>
 </section>

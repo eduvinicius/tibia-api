@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { IGuild } from '../../interfaces/IGuild';
+import { Component, Input, OnInit } from '@angular/core';
+import { IGuildModel } from '../../interfaces/IGuild';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-guild-card',
@@ -8,11 +9,7 @@ import { IGuild } from '../../interfaces/IGuild';
 })
 export class GuildCardComponent {
 
-  @Input() guild: IGuild | undefined;
-  @Input() isLoading: boolean | undefined;
+  @Input() guildData: Observable<IGuildModel | null> | undefined;
+  @Input() isLoading: Observable<boolean> | undefined;
 
-  formatDate(date: string): string {
-    const newDate = new Date(date)
-    return newDate.toLocaleDateString('pt-BR')
-  }
 }

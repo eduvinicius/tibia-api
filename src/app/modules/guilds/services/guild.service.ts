@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environments';
-import { IGuild } from '../interfaces/IGuild';
 import { HttpClient } from '@angular/common/http';
-import { IMemberDetails } from '../interfaces/IMemberDetails';
+import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environments';
+import { IGuildModel, IGuildResponse } from '../interfaces/IGuild';
+import { GuildMapper } from '../mappers/guildMapper';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,13 @@ export class GuildService {
 
   constructor(private http: HttpClient) { }
 
-  apiURLGuild: string = environment.apiURLGuilds;
-  apiURLMembersGuild: string = environment.apiURLCharacter;
+  private _apiURLGuild: string = environment.apiURLGuilds;
+  private _guildMapper = new GuildMapper();
 
-  getGuildByName(name: string): Observable<IGuild> {
-    return this.http.get<IGuild>(`${this.apiURLGuild}${name}`)
-  }
-
-  getGuildMembers(name: string): Observable<IMemberDetails> {
-    return this.http.get<IMemberDetails>(`${this.apiURLMembersGuild}${name}`)
+  getGuildByName(name: string): Observable<IGuildModel> {
+    return this.http.get<IGuildResponse>(`${this._apiURLGuild}${name}`)
+      .pipe(
+        map((guild) => this._guildMapper.mapFrom(guild))
+      )
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { IGuild, IGuildMembers } from '../../interfaces/IGuild';
+import { IGuildMembers } from '../../interfaces/IGuild';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-guild-member-card',
@@ -7,11 +8,7 @@ import { IGuild, IGuildMembers } from '../../interfaces/IGuild';
   styleUrls: ['./guild-member-card.component.scss']
 })
 
-export class GuildMemberCardComponent  {
-  @Input() guildMembers: IGuildMembers[] | undefined;
+export class GuildMemberCardComponent {
+  @Input() guildMembers: Observable<IGuildMembers[] | null> | undefined;
 
-  formatDate(date: string) {
-    const newDate = new Date(date);
-    return newDate.toLocaleDateString('pt-BR')
-  };
 }

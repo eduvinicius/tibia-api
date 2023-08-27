@@ -1,4 +1,4 @@
-export interface IGuild {
+export interface IGuildResponse {
  guilds: {
    guild: {
      active: boolean;
@@ -36,6 +36,19 @@ export interface IGuild {
      world: string;
    };
  }
+}
+
+export interface IGuildModel {
+  active: boolean,
+  logoUrl: string,
+  name: string,
+  world: string,
+  description: string,
+  founded: string,
+  playersOnline: number,
+  playersOffline: number,
+  totalMembers: number,
+  members: IGuildMembers[]
 }
 
 export interface IGuildMembers {

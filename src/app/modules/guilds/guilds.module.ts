@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GuildsRoutingModule } from './guilds-routing.module';
 import { GuildsComponent } from './pages/guilds/guilds.component';
@@ -26,7 +26,8 @@ import { SharedModule } from '../shared/shared.module';
     GuildsRoutingModule,
     HttpClientModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class GuildsModule { }
