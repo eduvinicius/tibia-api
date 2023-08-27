@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ICharacterWebDTO } from '../../interfaces/ICharacters';
+import { ICharacterModel } from '../../interfaces/ICharacters';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 
 @Component({
   selector: 'app-characters',
@@ -11,14 +12,26 @@ export class CharactersComponent  {
 
   constructor() {}
 
-  public character: ICharacterWebDTO | undefined;
-  public isLoading: boolean | undefined;
+  private _character = new Subject<ICharacterModel>();
+  private _isLoading = new BehaviorSubject<boolean>(false);
 
-  characterData(data: ICharacterWebDTO): void {
-    this.character = data
+  characterData(data: ICharacterModel) {
+    this._character.next(data)
   };
+
+  get character(): Observable<ICharacterModel>{
+    return this._character.pipe(
+      map((char) => char as ICharacterModel)
+    )
+  }
 
   isLoadingEvent(loader: boolean): void {
-    this.isLoading = loader
+    this._isLoading.next(loader)
   };
+
+  get isLoading(): Observable<boolean> {
+    return this._isLoading.pipe(
+      map((value) => value)
+    )
+  }
 }

@@ -16,7 +16,7 @@ export class CreaturesComponent implements OnInit {
     ) {}
 
     private readonly _creaturesList = new BehaviorSubject<ICreaturesListModel[]>([]);
-    public visibleCreatures = new BehaviorSubject<ICreaturesListModel[]>([]);
+    private _visibleCreatures = new BehaviorSubject<ICreaturesListModel[]>([]);
 
     private readonly _chunkSize: number = 10;
     private _currentPage: number = 1;
@@ -27,6 +27,10 @@ export class CreaturesComponent implements OnInit {
     ngOnInit(): void {
       this.getCreaturesListData();
     };
+
+    get visibleCreatures(): BehaviorSubject<ICreaturesListModel[]> {
+      return this._visibleCreatures
+    }
 
     getCreaturesListData(): void {
       this.isLoading.next(true)
@@ -52,7 +56,7 @@ export class CreaturesComponent implements OnInit {
       const endIndex: number = startIndex + this._chunkSize;
       let creaturesList: ICreaturesListModel[] = this._creaturesList.value;
       if (startIndex < creaturesList.length) {
-        this.visibleCreatures.next(creaturesList.slice(0, endIndex))
+        this._visibleCreatures.next(creaturesList.slice(0, endIndex))
         this._currentPage++;
       };
     };

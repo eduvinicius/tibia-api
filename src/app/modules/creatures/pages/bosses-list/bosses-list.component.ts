@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IBossesRequestDTO, IBossesListWebDTO } from '../../interfaces/IBossesList';
+import { IBossesListModel } from '../../interfaces/IBossesList';
 import { CreaturesService } from '../../services/creatures.service';
 import { BehaviorSubject } from 'rxjs';
-import { BossesListMapper } from '../../mappers/bossesListMapper';
 
 @Component({
   selector: 'app-bosses-list',
@@ -14,12 +13,10 @@ export class BossesListComponent implements OnInit {
 
   constructor(private _creaturesService: CreaturesService) {}
 
-  private bossesMapper = new BossesListMapper();
-
-  private _bossesList: IBossesListWebDTO[] = [];
-  public visibleData: IBossesListWebDTO[] = []; // Dados visíveis no scroll
-  private _chunkSize = 10; // Quantidade de dados a serem exibidos por vez
-  private _currentPage = 1;
+  private readonly _bossesList = new BehaviorSubject<IBossesListModel[]>([]);
+  private _visibleBosses = new BehaviorSubject<IBossesListModel[]>([]);
+  private readonly _chunkSize: number = 10;
+  private _currentPage: number = 1;
   public isLoading = new BehaviorSubject<boolean>(false);
   public btnTitle: string = 'Ver mais';
 
@@ -27,10 +24,14 @@ export class BossesListComponent implements OnInit {
     this.getBossesListData();
   };
 
+  get visibleBosses(): BehaviorSubject<IBossesListModel[]> {
+    return this._visibleBosses
+  }
+
   getBossesListData(): void {
     this.isLoading.next(true)
     this._creaturesService.getAllBosses().subscribe({
-      next: (data: IBossesRequestDTO) => {
+      next: (data: IBossesListModel[]) => {
         this.handleBossesListData(data);
       },
       error: (error) => {
@@ -40,18 +41,18 @@ export class BossesListComponent implements OnInit {
     });
   };
 
-  handleBossesListData(data: IBossesRequestDTO): void {
-    const newData = data.boostable_bosses.boostable_boss_list
-    this._bossesList = this.bossesMapper.mapTo(newData)
-    this.loadNextChunk();
+  handleBossesListData(data: IBossesListModel[]): void {
+    this._bossesList.next(data)
+    this.loadNextBossPage();
     this.isLoading.next(false);
   }
 
-  loadNextChunk(): void {
+  loadNextBossPage(): void {
     const startIndex: number = (this._currentPage - 1) * this._chunkSize;
     const endIndex: number = startIndex + this._chunkSize;
-    if (startIndex < this._bossesList.length) {
-      this.visibleData = this._bossesList.slice(0, endIndex);
+    const bossesList: IBossesListModel[] = this._bossesList.value
+    if (startIndex < bossesList.length) {
+      this._visibleBosses.next(bossesList.slice(0, endIndex));
       this._currentPage++;
     };
   };

@@ -1,15 +1,14 @@
-import { IBossesListRequestDTO, IBossesListWebDTO } from "../interfaces/IBossesList";
+import { IBossesResponseDTO, IBossesListModel } from "../interfaces/IBossesList";
 
 export class BossesListMapper {
 
-  mapTo(value: IBossesListRequestDTO[]): IBossesListWebDTO[] {
-    const newList = value.map(item => {
+  mapFrom(value: IBossesResponseDTO): IBossesListModel[] {
+    const bossList = value.boostable_bosses.boostable_boss_list.map(boss => {
       return {
-        image: item.image_url,
-        name: item.name
+        imageUrl: boss.image_url,
+        name: boss.name
       }
-    })
-
-    return newList
+    });
+    return bossList
   }
 }

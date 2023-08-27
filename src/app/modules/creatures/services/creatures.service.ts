@@ -4,9 +4,10 @@ import { environment } from 'src/environments/environments';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ICreaturesResponseDTO, ICreaturesListModel } from '../interfaces/ICreaturesList';
 import { ICreatureModel, ICreatureResponseDTO } from '../interfaces/ICreature';
-import { IBossesRequestDTO } from '../interfaces/IBossesList';
+import { IBossesListModel, IBossesResponseDTO } from '../interfaces/IBossesList';
 import { CreaturesListMapper } from '../mappers/creaturesListMapper';
 import { CreatureMapper } from '../mappers/creatureMapper';
+import { BossesListMapper } from '../mappers/bossesListMapper';
 
 @Injectable({
   providedIn: 'root'
@@ -18,27 +19,32 @@ export class CreaturesService {
   private readonly apiBossesURL: string = environment.apiURLBosses;
   private readonly creatureListMapper = new CreaturesListMapper();
   private readonly creatureMapper = new CreatureMapper();
+  private readonly bossesListMapper = new BossesListMapper
 
   constructor(private readonly http: HttpClient) { }
 
   getAllCreatures(): Observable<ICreaturesListModel[]> {
     return this.http.get<ICreaturesResponseDTO>(this.apiCreatureURL)
-    .pipe(
-      map(response => this.creatureListMapper.mapFrom(response)),
-      catchError(error => this.handleError(error))
-    )
+      .pipe(
+        map(response => this.creatureListMapper.mapFrom(response)),
+        catchError(error => this.handleError(error))
+      )
   }
 
   getCreatureByRace(race: string): Observable<ICreatureModel> {
     return this.http.get<ICreatureResponseDTO>(`${this.apiCreatureByRaceURL}${race}`)
-    .pipe(
-      map(response => this.creatureMapper.mapFrom(response)),
-      catchError(error => this.handleError(error))
-    )
+      .pipe(
+        map(response => this.creatureMapper.mapFrom(response)),
+        catchError(error => this.handleError(error))
+      )
   }
 
-  getAllBosses(): Observable<IBossesRequestDTO> {
-    return this.http.get<IBossesRequestDTO>(this.apiBossesURL)
+  getAllBosses(): Observable<IBossesListModel[]> {
+    return this.http.get<IBossesResponseDTO>(this.apiBossesURL)
+      .pipe(
+        map(response => this.bossesListMapper.mapFrom(response)),
+        catchError(error => this.handleError(error))
+      )
   }
 
   private handleError(error: Error): Observable<never> {

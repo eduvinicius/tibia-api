@@ -1,6 +1,6 @@
 import { IBaseInformation } from "../../../Interfaces/IBaseInformation";
 
-export interface IBossesRequestDTO extends IBaseInformation {
+export interface IBossesResponseDTO extends IBaseInformation {
   boostable_bosses: {
     boostable_boss_list: {
       featured: boolean;
@@ -15,13 +15,7 @@ export interface IBossesRequestDTO extends IBaseInformation {
   };
 }
 
-export interface IBossesListRequestDTO {
-  featured: boolean;
-  image_url: string;
-  name: string;
-}
-
-export interface IBossesListWebDTO {
-  image: string,
+export interface IBossesListModel {
+  imageUrl: string,
   name: string
 }

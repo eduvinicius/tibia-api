@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CharactersService } from '../../services/characters.service';
 
-import { ICharacterRequestDTO, ICharacterWebDTO } from '../../interfaces/ICharacters';
-import { CharacterMapper } from '../../mappers/characterMapper';
-import { BehaviorSubject } from 'rxjs';
+import { ICharacterModel } from '../../interfaces/ICharacters';
+import { BehaviorSubject, Observable, Subject, take } from 'rxjs';
 
 @Component({
   selector: 'app-character-details',
@@ -20,8 +19,7 @@ export class CharacterDetailsComponent implements OnInit {
     private characterService: CharactersService
   ) {}
 
-  private _characterMapper = new CharacterMapper();
-  public character: ICharacterWebDTO | undefined;
+  private _character = new Subject<ICharacterModel>;
   private _characterID: string = '';
   public isLoading = new BehaviorSubject<boolean>(false);
 
@@ -32,12 +30,15 @@ export class CharacterDetailsComponent implements OnInit {
     this.getCharacterById();
   }
 
+  get character(): Observable<ICharacterModel> {
+    return this._character.asObservable().pipe(take(1));
+  }
+
   getCharacterById(): void {
     this.isLoading.next(true)
     this.characterService.getCharByName(this._characterID).subscribe({
-      next: (data: ICharacterRequestDTO) => {
-        this.handleCharacterData(data);
-        this.isLoading.next(false)
+      next: (response: ICharacterModel) => {
+        this.handleCharacterData(response);
       },
       error: (error) => {
         console.log(error);
@@ -46,8 +47,8 @@ export class CharacterDetailsComponent implements OnInit {
     })
   }
 
-  handleCharacterData(data: ICharacterRequestDTO): void {
-    const newData = this._characterMapper.mapTo(data);
-    this.character = newData
+  handleCharacterData(data: ICharacterModel): void {
+    this._character.next(data);
+    this.isLoading.next(false);
   }
 }

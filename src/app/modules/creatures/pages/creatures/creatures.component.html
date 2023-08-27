@@ -1,4 +1,4 @@
-<section class="creatures">
+<section class="creatures" *ngIf="visibleCreatures | async">
     <h1 class="creatures-title">Lista de Criaturas</h1>
     <p class="creatures-paragraph">
       Nesta seção você pode conferir todas as criaturas disponíveis no Tibia.

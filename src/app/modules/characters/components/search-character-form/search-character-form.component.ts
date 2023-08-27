@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { CharactersService } from '../../services/characters.service';
-import { ICharacterRequestDTO, ICharacterWebDTO } from '../../interfaces/ICharacters';
-import { CharacterMapper } from '../../mappers/characterMapper';
+import { ICharacterModel } from '../../interfaces/ICharacters';
+import { ICharForm } from '../../interfaces/ICharForm';
 
 @Component({
   selector: 'app-search-character-form',
@@ -11,30 +13,49 @@ import { CharacterMapper } from '../../mappers/characterMapper';
 
 export class SearchCharacterFormComponent {
 
-  constructor(private characterService: CharactersService) {}
-
-  @Output() character = new EventEmitter<ICharacterWebDTO>();
+  @Output() character = new EventEmitter<ICharacterModel>();
   @Output() isLoading = new EventEmitter<boolean>();
-  private _characterMapper = new CharacterMapper();
-  searchChar: string = '';
+  public charForm: FormGroup;
+  public charFormValidation = new BehaviorSubject<boolean>(false);
+
+  constructor(private characterService: CharactersService) {
+    this.charForm = new FormGroup({
+      charName: new FormControl('', [Validators.required])
+    })
+  }
+
+  get charName(): AbstractControl<string> {
+    return this.charForm.get('charName')!
+  }
 
   submitForm() {
-    this.isLoading.emit(true)
-    this.characterService.getCharByName(this.searchChar).subscribe({
-      next: (data: ICharacterRequestDTO) => {
-        this.handleCharacterData(data)
-        this.isLoading.emit(false)
-      },
-      error: (error) => {
-        console.log(error)
-        this.isLoading.emit(false)
-      }
-    });
-    this.searchChar = '';
+    if (this.charForm.valid) {
+      this.isLoading.emit(true)
+      const formData = this.charForm.value as ICharForm;
+      this.characterService.getCharByName(formData.charName).subscribe({
+        next: (data: ICharacterModel) => {
+          this.handleCharacterData(data)
+        },
+        error: (error) => {
+          console.log(error)
+          this.isLoading.emit(false)
+        }
+      });
+      this.charForm.reset();
+    } else {
+      this.charFormValidation.next(true);
+      this.handleTimeout(3000);
+    }
   };
 
-  handleCharacterData(data: ICharacterRequestDTO): void {
-    const newData = this._characterMapper.mapTo(data);
-    this.character.emit(newData);
+  handleCharacterData(data: ICharacterModel): void {
+    this.character.emit(data);
+    this.isLoading.emit(false);
+  }
+
+  handleTimeout(time: number): void {
+    setTimeout(() => {
+      this.charFormValidation.next(false)
+    }, time)
   }
 }

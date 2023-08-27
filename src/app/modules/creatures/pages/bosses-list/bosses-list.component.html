@@ -1,11 +1,12 @@
-<main class="bosses">
+<main class="bosses" *ngIf="visibleBosses | async">
   <h1 class="bosses-title">Lista de Bosses</h1>
+  <span class="bosses-number">Número de Bosses na lista {{ visibleBosses.value.length }}</span>
   <section class="bosses-list">
     <app-loader *ngIf="(isLoading | async)"></app-loader>
-    <div class="bosses-list-card" *ngFor="let boss of visibleData">
-      <img src="{{ boss?.image }}" alt="Criatura" class="bosses-list-card-img">
+    <div class="bosses-list-card" *ngFor="let boss of visibleBosses.value">
+      <img src="{{ boss?.imageUrl }}" alt="Criatura" class="bosses-list-card-img">
       <p class="bosses-list-card-name">{{ boss?.name }}</p>
     </div>
   </section>
-  <app-button [btnTitle]="btnTitle" (click)="loadNextChunk()"></app-button>
+  <app-button [btnTitle]="btnTitle" (click)="loadNextBossPage()"></app-button>
 </main>

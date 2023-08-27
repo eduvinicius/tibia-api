@@ -1,4 +1,4 @@
-<form class="character-search-form" (ngSubmit)="submitForm()">
+<form [formGroup]="charForm" class="character-search-form" (ngSubmit)="submitForm()" #formDir="ngForm">
   <label for="search" class="character-search-form-label">Personagem:</label>
   <input
     type="text"
@@ -6,7 +6,11 @@
     placeholder="Digite o nome"
     id="search"
     name="search"
-    [(ngModel)]="searchChar"
+    formControlName="charName"
   >
   <input type="submit" class="character-search-form-submit">
+
+  <div class="error-message" *ngIf="charName.invalid && formDir.submitted && (charFormValidation | async)">
+    <span *ngIf="charName.errors?.['required']">O nome do personagem é obrigatório!</span>
+  </div>
 </form>
