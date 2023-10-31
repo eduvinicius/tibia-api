@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CreaturesService } from '../../services/creatures.service';
 import { ICreatureModel } from '../../interfaces/ICreature';
-import { CreatureMapper } from '../../mappers/creatureMapper';
-import { BehaviorSubject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { CreatureFormService } from '../../services/creature-form.service';
+import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 
 @Component({
@@ -12,39 +13,48 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./creature-details.component.scss']
 })
 
-export class CreatureDetailsComponent implements OnInit {
+export class CreatureDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private creatureService: CreaturesService
+    private creatureService: CreaturesService,
+    public creatureFormService: CreatureFormService,
+    private _loaderService: LoaderService
     ) { }
 
     private _race: string = '';
-    public creature: ICreatureModel | undefined;
-    public isLoading = new BehaviorSubject<boolean>(false);
+    private _onDestroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this._race =  params['id']
-    })
-    this.getCreatureByRace()
+    this.getParamsUrl();
+    this.getCreatureByRace();
   };
 
-  getCreatureByRace() {
-    this.isLoading.next(true);
-    this.creatureService.getCreatureByRace(this._race).subscribe({
+  public getParamsUrl():void {
+    this.route.params
+    .pipe(takeUntil(this._onDestroy$))
+    .subscribe(params => {
+      this._race =  params['id']
+    })
+  }
+
+  public getCreatureByRace(): void {
+    this._loaderService.setLoading(true);
+    this.creatureService.getCreatureByRace(this._race)
+    .pipe(takeUntil(this._onDestroy$))
+    .subscribe({
       next: (data: ICreatureModel) => {
-        this.handleCreatureData(data)
+        this.creatureFormService.notifyOnCreatureChanged(data)
+        this._loaderService.setLoading(false);
       },
       error: (error) => {
         console.log(error);
-        this.isLoading.next(false);
+        this._loaderService.setLoading(false);
       }
     });
   };
 
-  handleCreatureData(data:ICreatureModel) {
-    this.creature = data
-    this.isLoading.next(false);
+  ngOnDestroy(): void {
+    this._onDestroy$.next();
   }
 }

@@ -6,6 +6,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CreaturesRoutingModule } from './creatures-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { FormatListPipe } from '../core/pipes/formatList.pipe';
+
 import { CreaturesService } from './services/creatures.service';
 
 import { CreaturesComponent } from './pages/creatures/creatures.component';
@@ -40,7 +42,8 @@ import { ButtonComponent } from './components/button/button.component';
     FormsModule,
     FontAwesomeModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormatListPipe
   ]
 })
 export class CreaturesModule { }

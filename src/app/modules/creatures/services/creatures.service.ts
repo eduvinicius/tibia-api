@@ -14,40 +14,40 @@ import { BossesListMapper } from '../mappers/bossesListMapper';
 })
 export class CreaturesService {
 
-  private readonly apiCreatureURL: string = environment.apiURLCreature;
-  private readonly apiCreatureByRaceURL: string = environment.URLCreatureByRace;
-  private readonly apiBossesURL: string = environment.apiURLBosses;
-  private readonly creatureListMapper = new CreaturesListMapper();
-  private readonly creatureMapper = new CreatureMapper();
-  private readonly bossesListMapper = new BossesListMapper
+  private readonly _apiCreatureURL: string = environment.apiURLCreature;
+  private readonly _apiCreatureByRaceURL: string = environment.URLCreatureByRace;
+  private readonly _apiBossesURL: string = environment.apiURLBosses;
+  private readonly _creatureListMapper = new CreaturesListMapper();
+  private readonly _creatureMapper = new CreatureMapper();
+  private readonly _bossesListMapper = new BossesListMapper();
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly _http: HttpClient) { }
 
-  getAllCreatures(): Observable<ICreaturesListModel[]> {
-    return this.http.get<ICreaturesResponseDTO>(this.apiCreatureURL)
+  public getAllCreatures(): Observable<ICreaturesListModel[]> {
+    return this._http.get<ICreaturesResponseDTO>(this._apiCreatureURL)
       .pipe(
-        map(response => this.creatureListMapper.mapFrom(response)),
-        catchError(error => this.handleError(error))
+        map(response => this._creatureListMapper.mapFrom(response)),
+        catchError(error => this._handleError(error))
       )
   }
 
-  getCreatureByRace(race: string): Observable<ICreatureModel> {
-    return this.http.get<ICreatureResponseDTO>(`${this.apiCreatureByRaceURL}${race}`)
+  public getCreatureByRace(race: string): Observable<ICreatureModel> {
+    return this._http.get<ICreatureResponseDTO>(`${this._apiCreatureByRaceURL}${race}`)
       .pipe(
-        map(response => this.creatureMapper.mapFrom(response)),
-        catchError(error => this.handleError(error))
+        map(response => this._creatureMapper.mapFrom(response)),
+        catchError(error => this._handleError(error))
       )
   }
 
-  getAllBosses(): Observable<IBossesListModel[]> {
-    return this.http.get<IBossesResponseDTO>(this.apiBossesURL)
+  public getAllBosses(): Observable<IBossesListModel[]> {
+    return this._http.get<IBossesResponseDTO>(this._apiBossesURL)
       .pipe(
-        map(response => this.bossesListMapper.mapFrom(response)),
-        catchError(error => this.handleError(error))
+        map(response => this._bossesListMapper.mapFrom(response)),
+        catchError(error => this._handleError(error))
       )
   }
 
-  private handleError(error: Error): Observable<never> {
+  private _handleError(error: Error): Observable<never> {
     console.error(`Ocorreu um erro: ${error}`);
     return throwError(error);
   }

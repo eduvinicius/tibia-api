@@ -1,5 +1,5 @@
 <section>
-  <form [formGroup]="creatureForm" (ngSubmit)="submitForm()" class="creature-search-form" #formDir="ngForm">
+  <form [formGroup]="creatureFormService.creatureForm" (ngSubmit)="submitForm()" class="creature-search-form" #formDir="ngForm">
     <label for="search" class="creature-search-form-label">Criatura:</label>
     <input
       type="text"
@@ -12,8 +12,8 @@
     <input type="submit" class="creature-search-form-submit">
   </form>
 
-  <div class="error-message" *ngIf="creatureName.invalid && formDir.submitted && (creatureFormValidation | async)">
-    <span *ngIf="creatureName.errors?.['required']">O nome da criatura é obrigatório!</span>
+  <div class="error-message" *ngIf="creatureFormService.creatureName.invalid && formDir.submitted && (creatureFormValidation | async)">
+    <span *ngIf="creatureFormService.creatureName.errors?.['required']">O nome da criatura é obrigatório!</span>
   </div>
 </section>
 

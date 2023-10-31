@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IBossesListModel } from '../../interfaces/IBossesList';
 import { CreaturesService } from '../../services/creatures.service';
-import { BehaviorSubject } from 'rxjs';
+import { LoaderService } from 'src/app/modules/core/services/loader.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bosses-list',
@@ -9,50 +10,58 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./bosses-list.component.scss']
 })
 
-export class BossesListComponent implements OnInit {
+export class BossesListComponent implements OnInit, OnDestroy {
 
-  constructor(private _creaturesService: CreaturesService) {}
+  constructor(
+    private _creaturesService: CreaturesService,
+    public loaderService: LoaderService
+    ) {}
 
-  private readonly _bossesList = new BehaviorSubject<IBossesListModel[]>([]);
-  private _visibleBosses = new BehaviorSubject<IBossesListModel[]>([]);
+  private readonly _bossesList$ = new BehaviorSubject<IBossesListModel[]>([]);
+  private _visibleBosses$ = new BehaviorSubject<IBossesListModel[]>([]);
+  public visibleBosses$ = this._visibleBosses$.asObservable();
   private readonly _chunkSize: number = 10;
   private _currentPage: number = 1;
-  public isLoading = new BehaviorSubject<boolean>(false);
+  private _subscription!: Subscription;
   public btnTitle: string = 'Ver mais';
 
   ngOnInit(): void {
-    this.getBossesListData();
+    this._getBossesListData();
   };
 
-  get visibleBosses(): BehaviorSubject<IBossesListModel[]> {
-    return this._visibleBosses
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 
-  getBossesListData(): void {
-    this.isLoading.next(true)
-    this._creaturesService.getAllBosses().subscribe({
+  public trackBossesList(index: number): number {
+    return index;
+  }
+
+  private _getBossesListData(): void {
+    this.loaderService.setLoading(true);
+    this._subscription = this._creaturesService.getAllBosses().subscribe({
       next: (data: IBossesListModel[]) => {
-        this.handleBossesListData(data);
+        this._handleBossesListData(data);
       },
       error: (error) => {
         console.log(error)
-        this.isLoading.next(false);
+        this.loaderService.setLoading(false);
       }
     });
   };
 
-  handleBossesListData(data: IBossesListModel[]): void {
-    this._bossesList.next(data)
+  private _handleBossesListData(data: IBossesListModel[]): void {
+    this._bossesList$.next(data)
     this.loadNextBossPage();
-    this.isLoading.next(false);
+    this.loaderService.setLoading(false);
   }
 
-  loadNextBossPage(): void {
+  public loadNextBossPage(): void {
     const startIndex: number = (this._currentPage - 1) * this._chunkSize;
     const endIndex: number = startIndex + this._chunkSize;
-    const bossesList: IBossesListModel[] = this._bossesList.value
+    const bossesList: IBossesListModel[] = this._bossesList$.value
     if (startIndex < bossesList.length) {
-      this._visibleBosses.next(bossesList.slice(0, endIndex));
+      this._visibleBosses$.next(bossesList.slice(0, endIndex));
       this._currentPage++;
     };
   };

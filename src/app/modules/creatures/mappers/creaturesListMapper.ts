@@ -3,14 +3,14 @@ import { ICreaturesListModel, ICreaturesListResponseDTO, ICreaturesResponseDTO }
 export class CreaturesListMapper {
 
   mapFrom(value: ICreaturesResponseDTO): ICreaturesListModel[] {
-    const creatureList: ICreaturesListResponseDTO[] = value.creatures.creature_list;
-    const newCreatureList: ICreaturesListModel[] = creatureList.map(item => {
+    const { creatures } = value;
+    const creatureList: ICreaturesListModel[] = creatures.creature_list.map(creature => {
       return {
-        image: item.image_url,
-        name: item.name,
-        race: item.race
+        image: creature.image_url,
+        name: creature.name,
+        race: creature.race
       }
     })
-    return newCreatureList;
+    return creatureList;
   }
 }

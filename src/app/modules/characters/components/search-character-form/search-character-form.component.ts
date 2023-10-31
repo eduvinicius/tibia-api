@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CharactersService } from '../../services/characters.service';
 import { ICharacterModel } from '../../interfaces/ICharacters';
 import { ICharForm } from '../../interfaces/ICharForm';
+import { CharacterFormService } from '../../services/character-form.service';
 
 @Component({
   selector: 'app-search-character-form',
@@ -15,23 +15,17 @@ export class SearchCharacterFormComponent {
 
   @Output() character = new EventEmitter<ICharacterModel>();
   @Output() isLoading = new EventEmitter<boolean>();
-  public charForm: FormGroup;
   public charFormValidation = new BehaviorSubject<boolean>(false);
 
-  constructor(private characterService: CharactersService) {
-    this.charForm = new FormGroup({
-      charName: new FormControl('', [Validators.required])
-    })
-  }
-
-  get charName(): AbstractControl<string> {
-    return this.charForm.get('charName')!
-  }
+  constructor(
+    private characterService: CharactersService,
+    public charForm: CharacterFormService
+    ) {}
 
   submitForm() {
-    if (this.charForm.valid) {
+    if (this.charForm.characterForm.valid) {
       this.isLoading.emit(true)
-      const formData = this.charForm.value as ICharForm;
+      const formData = this.charForm.characterForm.value as ICharForm;
       this.characterService.getCharByName(formData.charName).subscribe({
         next: (data: ICharacterModel) => {
           this.handleCharacterData(data)
@@ -41,7 +35,7 @@ export class SearchCharacterFormComponent {
           this.isLoading.emit(false)
         }
       });
-      this.charForm.reset();
+      this.charForm.characterForm.reset();
     } else {
       this.charFormValidation.next(true);
       this.handleTimeout(3000);

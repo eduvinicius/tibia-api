@@ -1,7 +1,7 @@
 <section class="creatures-list" *ngIf="visibleCreatures">
-  <div class="creatures-list-card" *ngFor="let creature of visibleCreatures">
+  <div class="creatures-list-card" *ngFor="let creature of visibleCreatures; trackBy: trackCreatureList">
     <a routerLink="/criaturas/detalhes/{{ creature?.race }}">
-      <img src="{{ creature?.image }}" alt="Criatura" class="creatures-list-card-img">
+      <img [src]="creature?.image" alt="Criatura" class="creatures-list-card-img">
       <p class="creatures-list-card-name">{{ creature?.name }}</p>
     </a>
   </div>

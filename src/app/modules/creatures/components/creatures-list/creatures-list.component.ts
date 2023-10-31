@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TrackByFunction } from '@angular/core';
 import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 
 @Component({
@@ -8,4 +8,8 @@ import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 })
 export class CreaturesListComponent {
   @Input() visibleCreatures: ICreaturesListModel[] | null = [];
+
+  public trackCreatureList(index: number): number {
+    return index;
+  }
 }

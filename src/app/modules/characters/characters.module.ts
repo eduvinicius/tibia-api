@@ -20,7 +20,7 @@ import { CharacterDetailsComponent } from './pages/character-details/character-d
     CharacterDetailsComponent,
   ],
   providers: [
-    CharactersService
+    CharactersService,
   ],
   imports: [
     CommonModule,

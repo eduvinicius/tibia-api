@@ -21,8 +21,6 @@ export class MyHttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
 
-    console.log('Interceptor - Antes da Requisição');
-
     const modifiedRequest = request.clone({
 
     });

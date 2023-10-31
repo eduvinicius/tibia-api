@@ -1,4 +1,4 @@
-<section class="creatures" *ngIf="visibleCreatures | async">
+<section class="creatures">
     <h1 class="creatures-title">Lista de Criaturas</h1>
     <p class="creatures-paragraph">
       Nesta seção você pode conferir todas as criaturas disponíveis no Tibia.
@@ -9,11 +9,11 @@
       Caso queira visualizar uma lista de bosses,
       <a routerLink="/criaturas/bosses" class="creatures-link">Clique aqui!</a>
     </p>
-    <p class="creatures-paragraph">Número de criaturas na lista: {{ visibleCreatures.value.length }}</p>
-    <app-loader *ngIf="(isLoading | async)"></app-loader>
+    <p class="creatures-paragraph">Número de criaturas na lista: {{ (visibleCreatures$ | async)?.length }}</p>
+    <app-loader *ngIf="(loaderService.loading$ | async)"></app-loader>
     <app-creatures-list
-      *ngIf="!(isLoading | async)"
-      [visibleCreatures]="visibleCreatures | async"
+      *ngIf="!(loaderService.loading$ | async)"
+      [visibleCreatures]="visibleCreatures$ | async"
     >
     </app-creatures-list>
     <app-button [btnTitle]="btnTitle" (click)="loadNextPageOfCreatures()"></app-button>
