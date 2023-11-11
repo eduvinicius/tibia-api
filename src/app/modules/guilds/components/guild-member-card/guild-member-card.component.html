@@ -1,20 +1,20 @@
-<ng-container *ngIf="guildMembers | async as members">
-  <h1 class="title">Membros da Guilda</h1>
-  <section class="guild-members">
-    <div class="guild-members-card" *ngFor="let member of members">
-      <a class="guild-members-card-content" routerLink="/personagens/detalhes/{{ member.name }}">
-        <h4>{{ member.name }}</h4>
-        <h4>Vocação: {{ member.vocation }}</h4>
-        <p>Rank: {{ member.rank }}</p>
-        <p>Nível: {{ member.level }}</p>
-        <p>Entrou em: {{ member.joined | date: 'dd/MM/yyyy' }}</p>
-        <p> Status:
-          <span ngClass="{'online':{{ member.status }} === 'online',
-          'offline': {{ member.status }} === 'offline'} ">
-            {{ member.status }}
-          </span>
-        </p>
-      </a>
-    </div>
-  </section>
+<ng-container *ngIf="members?.length">
+    <h1 class="title">Membros da Guilda</h1>
+    <section class="guild-members">
+      <div class="guild-members-card" *ngFor="let member of members">
+        <a class="guild-members-card-content" routerLink="/personagens/detalhes/{{ member.name }}">
+          <h4>{{ member.name }}</h4>
+          <h4>Vocação: {{ member.vocation }}</h4>
+          <p>Rank: {{ member.rank }}</p>
+          <p>Nível: {{ member.level }}</p>
+          <p>Entrou em: {{ member.joined | date: 'dd/MM/yyyy' }}</p>
+          <p> Status:
+            <span ngClass="{'online':{{ member.status }} === 'online',
+            'offline': {{ member.status }} === 'offline'} ">
+              {{ member.status }}
+            </span>
+          </p>
+        </a>
+      </div>
+    </section>
 </ng-container>

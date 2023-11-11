@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ICharacterModel } from '../../interfaces/ICharacters';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { CharacterFormService } from '../../services/character-form.service';
+import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
   selector: 'app-character-table',
@@ -8,24 +10,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrls: ['./character-table.component.scss']
 })
 
-export class CharacterTableComponent implements OnInit  {
+export class CharacterTableComponent implements OnInit, OnDestroy  {
 
- @Input() character: Observable<ICharacterModel> | undefined;
- @Input() isLoading: Observable<boolean> | undefined;
- public characterData = new BehaviorSubject<ICharacterModel | null>(null);
+ public characterData$ = new BehaviorSubject<ICharacterModel | null>(null);
  public isLoading$ = new BehaviorSubject<boolean | null>(null);
+ private _onDestroy$ = new Subject<void>();
+
+ constructor(private _charData: CharacterFormService, private _loader: LoaderService) {}
 
  ngOnInit(): void {
-   this.character?.subscribe((char) => {
-     this.characterData.next(char)
+   this._charData.characterData$.pipe(takeUntil(this._onDestroy$)).subscribe((char) => {
+     this.characterData$.next(char)
    })
 
-   this.isLoading?.subscribe((value) => {
+   this._loader.loading$.pipe(takeUntil(this._onDestroy$)).subscribe((value) => {
     this.isLoading$.next(value)
    })
  }
 
- hasComment(comment: string): string {
-  return comment ? comment : comment = 'Não há comentário'
- };
+  ngOnDestroy(): void {
+    this._onDestroy$.next();
+  }
 }

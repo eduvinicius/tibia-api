@@ -1,5 +1,5 @@
 <app-loader *ngIf="isLoading$ | async"></app-loader>
-<section class="character" *ngIf="characterData | async as char">
+<section class="character" *ngIf="characterData$ | async as char">
   <table class="character-table" *ngIf="char && char.name; else elseBlock">
     <caption class="character-table-title">Informações do Personagem</caption>
     <tbody class="character-table-body">
@@ -12,7 +12,7 @@
       <tr><td>Residência</td><td>{{ char.residence }}</td></tr>
       <tr><td>Último login</td><td>{{ char.last_login | date: 'dd/MM/yyyy' }}</td></tr>
       <tr><td>Status da Conta</td><td>{{ char.accountStatus }}</td></tr>
-      <tr><td>Comentário</td><td>{{ hasComment(char.comment) }}</td></tr>
+      <tr><td>Comentário</td><td>{{ char.comment | hasComment }}</td></tr>
       <tr><td>Criação</td><td>{{ char.created | date: 'dd/MM/yyyy' }}</td></tr>
     </tbody>
   </table>

@@ -10,6 +10,7 @@ import { CharactersService } from './services/characters.service';
 import { SearchCharacterFormComponent } from './components/search-character-form/search-character-form.component';
 import { CharacterTableComponent } from './components/character-table/character-table.component';
 import { CharacterDetailsComponent } from './pages/character-details/character-details.component';
+import { HasCommentPipe } from '../core/pipes/hasComment.pipe';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CharacterDetailsComponent } from './pages/character-details/character-d
     SearchCharacterFormComponent,
     CharacterTableComponent,
     CharacterDetailsComponent,
+    HasCommentPipe
   ],
   providers: [
     CharactersService,
@@ -28,7 +30,7 @@ import { CharacterDetailsComponent } from './pages/character-details/character-d
     HttpClientModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class CharactersModule { }

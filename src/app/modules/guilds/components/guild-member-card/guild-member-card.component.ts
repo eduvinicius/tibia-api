@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { GuildFormService } from '../../services/guildForm.service';
 import { IGuildMembers } from '../../interfaces/IGuild';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-guild-member-card',
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 
 export class GuildMemberCardComponent {
-  @Input() guildMembers: Observable<IGuildMembers[] | null> | undefined;
+
+  @Input() members: IGuildMembers[] | undefined = []
+  constructor(public guildData: GuildFormService) {}
 
 }

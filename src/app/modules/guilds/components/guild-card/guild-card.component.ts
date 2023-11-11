@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IGuildModel } from '../../interfaces/IGuild';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { GuildFormService } from '../../services/guildForm.service';
+import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
   selector: 'app-guild-card',
@@ -9,7 +9,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class GuildCardComponent {
 
-  @Input() guildData: Observable<IGuildModel | null> | undefined;
-  @Input() isLoading: Observable<boolean> | undefined;
+  constructor(public guildData: GuildFormService, public loader: LoaderService) {}
 
 }

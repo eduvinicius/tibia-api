@@ -1,4 +1,4 @@
-<form [formGroup]="guildForm" (ngSubmit)="submitForm()" class="guild-search-form" #formDir="ngForm">
+<form [formGroup]="guildFormService.guildForm" (ngSubmit)="submitForm()" class="guild-search-form" #formDir="ngForm">
   <label for="search" class="guild-search-form-label">Guilda:</label>
   <input
     type="text"
@@ -10,7 +10,7 @@
   >
   <input type="submit" class="guild-search-form-submit">
 
-  <div class="error-message" *ngIf="guildName.invalid && formDir.submitted && (guildFormValidation | async)">
-    <span *ngIf="guildName.errors?.['required']">O nome da guilda é obrigatório!</span>
+  <div class="error-message" *ngIf="guildFormService.guildName.invalid && formDir.submitted && (guildFormService.guildFormValidation | async)">
+    <span *ngIf="guildFormService.guildName.errors?.['required']">O nome da guilda é obrigatório!</span>
   </div>
 </form>

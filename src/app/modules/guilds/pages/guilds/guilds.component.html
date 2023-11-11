@@ -3,22 +3,8 @@
   <p class="guild-description">
     Nesta seção, você poderá pesquisar pelas guildas existentes no Tibia
   </p>
-  <app-guild-search-form
-   (guild)="guildData($event)"
-   (guildMembers)="guildMembersData($event)"
-   (isLoading)="isLoadingEvent($event)"
-   >
-  </app-guild-search-form>
-  <app-guild-card
-    [guildData]="guild"
-    [isLoading]="isLoading"
-    >
-  </app-guild-card>
-  <ng-container *ngIf="guild | async as guild$">
-    <app-guild-member-card
-      *ngIf="guild$.active"
-      [guildMembers]="guildMembers"
-      >
-    </app-guild-member-card>
+  <app-guild-search-form></app-guild-search-form>
+  <ng-container *ngIf="guildData.showGuildOnTemplate | async" >
+    <app-guild-card></app-guild-card>
   </ng-container>
 </section>
