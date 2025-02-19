@@ -35,17 +35,12 @@
         </li>
       </ul>
       <p class="creature-search-card-hp">
-        <fa-icon class="creature-search-card-icon creature-search-card-icon-heart"
-          [icon]="faHeart">
-        </fa-icon>
         <span class="creature-search-card-span">HP:</span> {{ creature.hitpoints }}
       </p>
       <p class="creature-search-card-exp">
-        <fa-icon class="creature-search-card-icon" [icon]="faHatWizard"></fa-icon>
         <span class="creature-search-card-span">Pontos de Experiência:</span> {{ creature.experiencePoints }}
       </p>
       <p class="creature-search-card-loot">
-        <fa-icon class="creature-search-card-icon" [icon]="faBox"></fa-icon>
         <span class="creature-search-card-span">Loot:</span> {{ creature.lootList | formatList }}
       </p>
     </ng-container>

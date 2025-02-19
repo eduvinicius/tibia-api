@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CreaturesRoutingModule } from './creatures-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -40,7 +39,6 @@ import { ButtonComponent } from './components/button/button.component';
     CreaturesRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule,
     SharedModule,
     ReactiveFormsModule,
     FormatListPipe

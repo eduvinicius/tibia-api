@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ICreatureModel } from '../../interfaces/ICreature';
-import { IconDefinition, faHeart, faHatWizard, faBox } from '@fortawesome/free-solid-svg-icons';
 import { CreatureFormService } from '../../services/creature-form.service';
 import { LoaderService } from 'src/app/modules/core/services/loader.service';
 import { Observable, Subject, map, takeUntil } from 'rxjs';
@@ -17,9 +16,6 @@ export class CreatureCardComponent implements OnInit, OnDestroy {
   private _onDestroy$: Subject<void> = new Subject<void>();
   public creature = this.getCreatureData();
   public isLoading: boolean = false;
-  public faHeart: IconDefinition = faHeart;
-  public faHatWizard: IconDefinition = faHatWizard;
-  public faBox: IconDefinition = faBox;
 
   constructor(private _creatureFormService: CreatureFormService, private _loadingService: LoaderService) {}
 
