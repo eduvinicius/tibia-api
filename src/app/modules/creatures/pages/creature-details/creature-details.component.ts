@@ -8,9 +8,10 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 
 @Component({
-  selector: 'app-creature-details',
-  templateUrl: './creature-details.component.html',
-  styleUrls: ['./creature-details.component.scss']
+    selector: 'app-creature-details',
+    templateUrl: './creature-details.component.html',
+    styleUrls: ['./creature-details.component.scss'],
+    standalone: false
 })
 
 export class CreatureDetailsComponent implements OnInit, OnDestroy {

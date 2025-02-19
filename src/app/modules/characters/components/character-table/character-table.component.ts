@@ -5,9 +5,10 @@ import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
-  selector: 'app-character-table',
-  templateUrl: './character-table.component.html',
-  styleUrls: ['./character-table.component.scss']
+    selector: 'app-character-table',
+    templateUrl: './character-table.component.html',
+    styleUrls: ['./character-table.component.scss'],
+    standalone: false
 })
 
 export class CharacterTableComponent implements OnInit, OnDestroy  {

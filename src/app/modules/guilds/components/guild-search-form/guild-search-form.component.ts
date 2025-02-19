@@ -6,9 +6,10 @@ import { GuildFormService } from '../../services/guildForm.service';
 import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
-  selector: 'app-guild-search-form',
-  templateUrl: './guild-search-form.component.html',
-  styleUrls: ['./guild-search-form.component.scss']
+    selector: 'app-guild-search-form',
+    templateUrl: './guild-search-form.component.html',
+    styleUrls: ['./guild-search-form.component.scss'],
+    standalone: false
 })
 export class GuildSearchFormComponent {
 

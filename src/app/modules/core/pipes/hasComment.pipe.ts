@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'hasComment'
+    name: 'hasComment',
+    standalone: false
 })
 export class HasCommentPipe implements PipeTransform {
 

@@ -10,9 +10,10 @@ import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
-  selector: 'app-character-details',
-  templateUrl: './character-details.component.html',
-  styleUrls: ['./character-details.component.scss']
+    selector: 'app-character-details',
+    templateUrl: './character-details.component.html',
+    styleUrls: ['./character-details.component.scss'],
+    standalone: false
 })
 export class CharacterDetailsComponent implements OnInit, OnDestroy {
 

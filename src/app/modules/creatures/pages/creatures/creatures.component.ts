@@ -5,9 +5,10 @@ import { CreaturesService } from '../../services/creatures.service';
 import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
-  selector: 'app-creatures',
-  templateUrl: './creatures.component.html',
-  styleUrls: ['./creatures.component.scss']
+    selector: 'app-creatures',
+    templateUrl: './creatures.component.html',
+    styleUrls: ['./creatures.component.scss'],
+    standalone: false
 })
 
 export class CreaturesComponent implements OnInit, OnDestroy {

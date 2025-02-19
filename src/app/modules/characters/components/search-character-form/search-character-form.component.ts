@@ -7,9 +7,10 @@ import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderService } from 'src/app/modules/core/services/loader.service';
 
 @Component({
-  selector: 'app-search-character-form',
-  templateUrl: './search-character-form.component.html',
-  styleUrls: ['./search-character-form.component.scss']
+    selector: 'app-search-character-form',
+    templateUrl: './search-character-form.component.html',
+    styleUrls: ['./search-character-form.component.scss'],
+    standalone: false
 })
 
 export class SearchCharacterFormComponent implements OnDestroy {

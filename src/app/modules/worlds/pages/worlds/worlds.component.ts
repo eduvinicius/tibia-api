@@ -3,9 +3,10 @@ import { WorldsService } from '../../services/worlds.service';
 import { IRegularWorlds, IWorlds } from '../../interfaces/IWorlds';
 
 @Component({
-  selector: 'app-worlds',
-  templateUrl: './worlds.component.html',
-  styleUrls: ['./worlds.component.scss']
+    selector: 'app-worlds',
+    templateUrl: './worlds.component.html',
+    styleUrls: ['./worlds.component.scss'],
+    standalone: false
 })
 
 export class WorldsComponent implements OnInit {

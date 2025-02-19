@@ -7,9 +7,10 @@ import { Observable, Subject, map, takeUntil } from 'rxjs';
 
 
 @Component({
-  selector: 'app-creature-card',
-  templateUrl: './creature-card.component.html',
-  styleUrls: ['./creature-card.component.scss']
+    selector: 'app-creature-card',
+    templateUrl: './creature-card.component.html',
+    styleUrls: ['./creature-card.component.scss'],
+    standalone: false
 })
 
 export class CreatureCardComponent implements OnInit, OnDestroy {

@@ -4,9 +4,10 @@ import { WorldsService } from '../../services/worlds.service';
 import { IWorldDetails, IWorldsDetails } from '../../interfaces/IWorldDetails';
 
 @Component({
-  selector: 'app-world-details',
-  templateUrl: './world-details.component.html',
-  styleUrls: ['./world-details.component.scss']
+    selector: 'app-world-details',
+    templateUrl: './world-details.component.html',
+    styleUrls: ['./world-details.component.scss'],
+    standalone: false
 })
 
 export class WorldDetailsComponent implements OnInit {

@@ -3,9 +3,10 @@ import { ICreatureModel } from '../../interfaces/ICreature';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-creature-search',
-  templateUrl: './creature-search.component.html',
-  styleUrls: ['./creature-search.component.scss']
+    selector: 'app-creature-search',
+    templateUrl: './creature-search.component.html',
+    styleUrls: ['./creature-search.component.scss'],
+    standalone: false
 })
 
 export class CreatureSearchComponent  {

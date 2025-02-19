@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { IWorldDetails } from '../../interfaces/IWorldDetails';
 
 @Component({
-  selector: 'app-online-players-table',
-  templateUrl: './online-players-table.component.html',
-  styleUrls: ['./online-players-table.component.scss']
+    selector: 'app-online-players-table',
+    templateUrl: './online-players-table.component.html',
+    styleUrls: ['./online-players-table.component.scss'],
+    standalone: false
 })
 export class OnlinePlayersTableComponent {
 

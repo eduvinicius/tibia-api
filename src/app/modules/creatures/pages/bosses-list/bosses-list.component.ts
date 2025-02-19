@@ -5,9 +5,10 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-bosses-list',
-  templateUrl: './bosses-list.component.html',
-  styleUrls: ['./bosses-list.component.scss']
+    selector: 'app-bosses-list',
+    templateUrl: './bosses-list.component.html',
+    styleUrls: ['./bosses-list.component.scss'],
+    standalone: false
 })
 
 export class BossesListComponent implements OnInit, OnDestroy {
