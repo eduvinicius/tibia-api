@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import './scss/variables.scss';
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-
+@import "tailwindcss";
 
 * {
   padding: 0;
@@ -18,25 +16,25 @@ body {
 
 a {
   text-decoration: none;
-  color: $color-dark-brown;
+  color: #5a2800;
   transition: .3s;
 
   &:hover {
-    color: $color-chocolate;
+    color: #D2691E;
   }
 }
 
 
 ::-webkit-scrollbar {
   width: 8px;
-
+/*
   &-thumb {
-    background-color: $color-dark-brown;
+    background-color: #5a2800;
     border-radius: 4px;
   }
 
   &-track {
     background-color: #f1f1f1;
-  }
+  } */
 }
 

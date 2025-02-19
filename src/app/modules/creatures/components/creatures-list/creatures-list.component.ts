@@ -4,7 +4,7 @@ import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 @Component({
     selector: 'app-creatures-list',
     templateUrl: './creatures-list.component.html',
-    styleUrls: ['./creatures-list.component.scss'],
+    styleUrls: ['./creatures-list.component.css'],
     standalone: false
 })
 export class CreaturesListComponent {

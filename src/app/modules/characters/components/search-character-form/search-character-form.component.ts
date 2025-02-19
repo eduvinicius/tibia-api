@@ -9,7 +9,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-search-character-form',
     templateUrl: './search-character-form.component.html',
-    styleUrls: ['./search-character-form.component.scss'],
+    styleUrls: ['./search-character-form.component.css'],
     standalone: false
 })
 

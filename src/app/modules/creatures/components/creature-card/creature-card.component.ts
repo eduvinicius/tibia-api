@@ -9,7 +9,7 @@ import { Observable, Subject, map, takeUntil } from 'rxjs';
 @Component({
     selector: 'app-creature-card',
     templateUrl: './creature-card.component.html',
-    styleUrls: ['./creature-card.component.scss'],
+    styleUrls: ['./creature-card.component.css'],
     standalone: false
 })
 

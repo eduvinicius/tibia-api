@@ -10,7 +10,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-creature-details',
     templateUrl: './creature-details.component.html',
-    styleUrls: ['./creature-details.component.scss'],
+    styleUrls: ['./creature-details.component.css'],
     standalone: false
 })
 

@@ -10,7 +10,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-creature-search-form',
     templateUrl: './creature-search-form.component.html',
-    styleUrls: ['./creature-search-form.component.scss'],
+    styleUrls: ['./creature-search-form.component.css'],
     standalone: false
 })
 

@@ -7,7 +7,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 @Component({
     selector: 'app-bosses-list',
     templateUrl: './bosses-list.component.html',
-    styleUrls: ['./bosses-list.component.scss'],
+    styleUrls: ['./bosses-list.component.css'],
     standalone: false
 })
 

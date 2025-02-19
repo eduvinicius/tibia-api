@@ -4,7 +4,7 @@ import { IWorldDetails } from '../../interfaces/IWorldDetails';
 @Component({
     selector: 'app-online-players-table',
     templateUrl: './online-players-table.component.html',
-    styleUrls: ['./online-players-table.component.scss'],
+    styleUrls: ['./online-players-table.component.css'],
     standalone: false
 })
 export class OnlinePlayersTableComponent {

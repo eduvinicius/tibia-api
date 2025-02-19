@@ -4,7 +4,7 @@ import { IRegularWorlds } from '../../interfaces/IWorlds';
 @Component({
     selector: 'app-worlds-table',
     templateUrl: './worlds-table.component.html',
-    styleUrls: ['./worlds-table.component.scss'],
+    styleUrls: ['./worlds-table.component.css'],
     standalone: false
 })
 export class WorldsTableComponent {

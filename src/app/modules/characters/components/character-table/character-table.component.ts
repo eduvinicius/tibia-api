@@ -7,7 +7,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-character-table',
     templateUrl: './character-table.component.html',
-    styleUrls: ['./character-table.component.scss'],
+    styleUrls: ['./character-table.component.css'],
     standalone: false
 })
 

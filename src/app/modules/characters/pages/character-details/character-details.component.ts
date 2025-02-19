@@ -12,7 +12,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-character-details',
     templateUrl: './character-details.component.html',
-    styleUrls: ['./character-details.component.scss'],
+    styleUrls: ['./character-details.component.css'],
     standalone: false
 })
 export class CharacterDetailsComponent implements OnInit, OnDestroy {
