@@ -1,7 +1,7 @@
 import { IBaseInformation } from "src/app/Interfaces/IBaseInformation";
 
 export interface ICharacterResponseDTO extends IBaseInformation {
-  characters: {
+  character: {
     character: {
       name: string;
       sex: string;
