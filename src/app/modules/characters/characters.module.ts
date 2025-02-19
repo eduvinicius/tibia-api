@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
@@ -13,24 +13,18 @@ import { CharacterDetailsComponent } from './pages/character-details/character-d
 import { HasCommentPipe } from '../core/pipes/hasComment.pipe';
 
 
-@NgModule({
-  declarations: [
-    CharactersComponent,
-    SearchCharacterFormComponent,
-    CharacterTableComponent,
-    CharacterDetailsComponent,
-    HasCommentPipe
-  ],
-  providers: [
-    CharactersService,
-  ],
-  imports: [
-    CommonModule,
-    CharactersRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    SharedModule,
-    ReactiveFormsModule,
-  ]
-})
+@NgModule({ declarations: [
+        CharactersComponent,
+        SearchCharacterFormComponent,
+        CharacterTableComponent,
+        CharacterDetailsComponent,
+        HasCommentPipe
+    ], imports: [CommonModule,
+        CharactersRoutingModule,
+        FormsModule,
+        SharedModule,
+        ReactiveFormsModule], providers: [
+        CharactersService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class CharactersModule { }

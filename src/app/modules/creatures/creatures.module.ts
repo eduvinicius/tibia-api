@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreaturesRoutingModule } from './creatures-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -20,28 +20,22 @@ import { ButtonComponent } from './components/button/button.component';
 
 
 
-@NgModule({
-  declarations: [
-    CreaturesComponent,
-    CreatureCardComponent,
-    CreatureSearchFormComponent,
-    CreatureSearchComponent,
-    CreatureDetailsComponent,
-    BossesListComponent,
-    CreaturesListComponent,
-    ButtonComponent
-  ],
-  providers: [
-    CreaturesService
-  ],
-  imports: [
-    CommonModule,
-    CreaturesRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    SharedModule,
-    ReactiveFormsModule,
-    FormatListPipe
-  ]
-})
+@NgModule({ declarations: [
+        CreaturesComponent,
+        CreatureCardComponent,
+        CreatureSearchFormComponent,
+        CreatureSearchComponent,
+        CreatureDetailsComponent,
+        BossesListComponent,
+        CreaturesListComponent,
+        ButtonComponent
+    ], imports: [CommonModule,
+        CreaturesRoutingModule,
+        FormsModule,
+        SharedModule,
+        ReactiveFormsModule,
+        FormatListPipe], providers: [
+        CreaturesService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class CreaturesModule { }
