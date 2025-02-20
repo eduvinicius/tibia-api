@@ -1,0 +1,23 @@
+.character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 4em 0;
+  height: 80vh;
+}
+
+@media (max-width: 399px) {
+
+  .character {
+    height: 130vh;
+  }
+}
+
+@media (max-width: 700px) and (min-width: 400px) {
+
+  .character {
+    height: 110vh;
+  }
+}
+

@@ -1,0 +1,64 @@
+@import '../../../../../css/variables.css';
+
+
+.loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.guild {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.guild-card {
+  background-color: $color-sienna;
+  text-align: center;
+  width: 300px;
+  padding: 2em 2em;
+  margin: 2em 0;
+  border-radius: 15px;
+
+  &-img {
+    width: 100px;
+    border: 2px solid;
+  }
+
+  &-world {
+    margin: 1em 0;
+  }
+
+  &-container-description {
+    text-align: left;
+    height: 80px;
+    overflow-y: auto;
+    border: 3px solid;
+    border-color: $color-dark-brown;
+    margin: .3em 0 1em 0;
+    padding: .5em;
+  }
+
+  &-players-online {
+    margin: .5em 0;
+  }
+
+  &-players-offline {
+    margin: .5em 0;
+  }
+}
+
+.else-block {
+  margin-top: 2em;
+}
+
+@media (max-width: 700px) {
+
+  .guild-card {
+    width: 270px;
+  }
+}
+
+

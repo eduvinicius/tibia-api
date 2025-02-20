@@ -1,0 +1,15 @@
+@import '../../../../../css/variables.css';
+
+.footer {
+  background-color: $color-light-brown;
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+
+  &-link {
+    padding: .2em .1em;
+
+  }
+}
