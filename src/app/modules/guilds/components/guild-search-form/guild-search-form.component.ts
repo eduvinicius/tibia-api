@@ -8,7 +8,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-guild-search-form',
     templateUrl: './guild-search-form.component.html',
-    styleUrls: ['./guild-search-form.component.scss'],
+    styleUrls: ['./guild-search-form.component.css'],
     standalone: false
 })
 export class GuildSearchFormComponent {

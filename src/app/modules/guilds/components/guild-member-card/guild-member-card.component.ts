@@ -5,7 +5,7 @@ import { IGuildMembers } from '../../interfaces/IGuild';
 @Component({
     selector: 'app-guild-member-card',
     templateUrl: './guild-member-card.component.html',
-    styleUrls: ['./guild-member-card.component.scss'],
+    styleUrls: ['./guild-member-card.component.css'],
     standalone: false
 })
 

@@ -6,7 +6,7 @@ import { IWorldDetails, IWorldsDetails } from '../../interfaces/IWorldDetails';
 @Component({
     selector: 'app-world-details',
     templateUrl: './world-details.component.html',
-    styleUrls: ['./world-details.component.scss'],
+    styleUrls: ['./world-details.component.css'],
     standalone: false
 })
 

@@ -1,4 +1,4 @@
-@import '../../../../../scss/variables.scss';
+@use '../../../../../css/variables.css' as v;
 
 .world {
   display: flex;
@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center;
     row-gap: 15px;
-    background-color: $color-light-brown;
+    background-color: v.$color-light-brown;
     width: 400px;
     padding: 20px;
     border-radius: 15px;

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 @Component({
     selector: 'app-creature-search',
     templateUrl: './creature-search.component.html',
-    styleUrls: ['./creature-search.component.scss'],
+    styleUrls: ['./creature-search.component.css'],
     standalone: false
 })
 

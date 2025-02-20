@@ -5,7 +5,7 @@ import { IRegularWorlds, IWorlds } from '../../interfaces/IWorlds';
 @Component({
     selector: 'app-worlds',
     templateUrl: './worlds.component.html',
-    styleUrls: ['./worlds.component.scss'],
+    styleUrls: ['./worlds.component.css'],
     standalone: false
 })
 

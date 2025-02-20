@@ -5,7 +5,7 @@ import { LoaderService } from 'src/app/modules/core/services/loader.service';
 @Component({
     selector: 'app-guild-card',
     templateUrl: './guild-card.component.html',
-    styleUrls: ['./guild-card.component.scss'],
+    styleUrls: ['./guild-card.component.css'],
     standalone: false
 })
 export class GuildCardComponent {
