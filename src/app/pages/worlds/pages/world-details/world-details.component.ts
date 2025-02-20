@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WorldsService } from '../../services/worlds.service';
 import { IWorldDetails, IWorldsDetails } from '../../interfaces/IWorldDetails';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import { OnlinePlayersTableComponent } from '../../components/online-players-table/online-players-table.component';
 
 @Component({
     selector: 'app-world-details',
     templateUrl: './world-details.component.html',
     styleUrls: ['./world-details.component.css'],
-    standalone: true
+    standalone: true,
+    imports: [LoaderComponent, OnlinePlayersTableComponent]
 })
 
 export class WorldDetailsComponent implements OnInit {

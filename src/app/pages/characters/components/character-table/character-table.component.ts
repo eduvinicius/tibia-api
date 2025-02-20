@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { LoaderService } from 'src/app/shared/services/loader.service';
-import { DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { HasCommentPipe } from 'src/app/shared/pipes/hasComment.pipe';
 
 @Component({
@@ -12,7 +12,7 @@ import { HasCommentPipe } from 'src/app/shared/pipes/hasComment.pipe';
     templateUrl: './character-table.component.html',
     styleUrls: ['./character-table.component.css'],
     standalone: true,
-    imports: [LoaderComponent, DatePipe, HasCommentPipe]
+    imports: [LoaderComponent, DatePipe, HasCommentPipe, AsyncPipe]
 })
 
 export class CharacterTableComponent implements OnInit, OnDestroy  {

@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from './core/components/footer/footer.component';
-import { HeaderComponent } from './core/components/header/header.component';
-import { RouterModule } from '@angular/router';
-
+import { CoreComponent } from './core/core.component';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
     standalone: true,
-    imports: [FooterComponent, HeaderComponent, RouterModule]
+    imports: [CoreComponent]
 })
 export class AppComponent {
   title = 'tibia-api';

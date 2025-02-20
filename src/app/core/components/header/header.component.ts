@@ -8,15 +8,4 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  isOpen = false;
-  isOpenBurguer = false;
-
-  toggleDropdown() {
-    this.isOpen = !this.isOpen;
-  }
-
-  toggleBurguer() {
-    this.isOpenBurguer = !this.isOpenBurguer
-  }
-
 }

@@ -1,6 +1,6 @@
 <section class="world">
   <app-loader class="world-loader" *ngIf="isLoading"></app-loader>
-  <div class="world-card" *ngIf="worldDetails">
+  <!-- <div class="world-card" *ngIf="worldDetails">
     <h1>Nome: {{ worldDetails.world.name }}</h1>
     <p>Jogadores Online: {{ worldDetails.world.players_online }}</p>
     <p>Recorde de jogadores online: {{ worldDetails.world.record_players }}</p>
@@ -11,6 +11,6 @@
       <h3>Títulos de Quest:</h3>
       <p class="world-card-quests-list">{{ formatArray(worldDetails.world.world_quest_titles) }}</p>
     </div>
-  </div>
+  </div> -->
   <app-online-players-table [worldDetails]="worldDetails"></app-online-players-table>
 </section>

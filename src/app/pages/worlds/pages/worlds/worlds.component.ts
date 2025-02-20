@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { WorldsService } from '../../services/worlds.service';
 import { IRegularWorlds, IWorlds } from '../../interfaces/IWorlds';
+import { WorldsTableComponent } from '../../components/worlds-table/worlds-table.component';
 
 @Component({
     selector: 'app-worlds',
     templateUrl: './worlds.component.html',
     styleUrls: ['./worlds.component.css'],
-    standalone: true
+    standalone: true,
+    imports: [WorldsTableComponent]
 })
 
 export class WorldsComponent implements OnInit {

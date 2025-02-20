@@ -6,13 +6,14 @@ import { ICharForm } from '../../interfaces/ICharForm';
 import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-search-character-form',
     templateUrl: './search-character-form.component.html',
     styleUrls: ['./search-character-form.component.css'],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule]
+    imports: [FormsModule, ReactiveFormsModule, AsyncPipe]
 })
 
 export class SearchCharacterFormComponent implements OnDestroy {

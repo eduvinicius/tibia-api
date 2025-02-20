@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const guildRoutes: Routes = [
+export const guildsRoutes: Routes = [
   { path: '', redirectTo: 'guildas', pathMatch: 'full' },
   {
     path: 'guildas',

@@ -1,0 +1,12 @@
+<div
+    class="bg-tertiary height shadow-center">
+    <ul class="flex flex-col gap-2 w-full p-2">
+      @for (item of sideBarItens(); track $index) {
+        <li>
+          <a [routerLink]="item.route">
+            {{ item.title }}
+          </a>
+        </li>
+      }
+    </ul>
+</div>
