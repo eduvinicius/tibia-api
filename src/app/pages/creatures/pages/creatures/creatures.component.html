@@ -1,22 +1,28 @@
-<section class="creatures">
-    <h1 class="creatures-title">Lista de Criaturas</h1>
-    <p class="creatures-paragraph">
+<section class="flex flex-col justify-center items-center gap-2">
+    <h1 class="text-2xl font-700">Lista de Criaturas</h1>
+    <p>
       Nesta seção você pode conferir todas as criaturas disponíveis no Tibia.
       Caso queira procurar uma criatura específica pelo nome,
-      <a routerLink="/criaturas/pesquisa" class="creatures-link">Clique aqui!</a>
+      <a
+        routerLink="/criaturas/pesquisa"
+        class="font-700"
+        >
+        Clique aqui!
+      </a>
     </p>
-    <p class="creatures-paragraph">
+    <p>
       Caso queira visualizar uma lista de bosses,
-      <a routerLink="/criaturas/bosses" class="creatures-link">Clique aqui!</a>
+      <a routerLink="/criaturas/bosses" class="font-700">Clique aqui!</a>
     </p>
-    <p class="creatures-paragraph">Número de criaturas na lista: {{ (visibleCreatures$ | async)?.length }}</p>
-    <app-loader *ngIf="(loaderService.loading$ | async)"></app-loader>
-    <app-creatures-list
-      *ngIf="!(loaderService.loading$ | async)"
-      [visibleCreatures]="visibleCreatures$ | async"
-    >
-    </app-creatures-list>
-    <app-button [btnTitle]="btnTitle" (click)="loadNextPageOfCreatures()"></app-button>
+    <p>Número de criaturas na lista: {{ (visibleCreatures() | async)?.length }}</p>
+
+    @if (loaderService.loading$ | async) {
+      <app-loader></app-loader>
+    } @else {
+      <app-creatures-list
+        [visibleCreatures]="visibleCreatures() | async"
+      >
+      </app-creatures-list>
+      <app-button [btnTitle]="btnTitle()" (click)="loadNextPageOfCreatures()"></app-button>
+    }
 </section>
-
-

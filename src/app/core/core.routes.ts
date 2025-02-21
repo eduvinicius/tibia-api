@@ -26,4 +26,5 @@ export const coreRoutes: Routes = [
     path: 'sobre',
     loadComponent: () => import('../pages/about/about.component').then(m => m.AboutComponent)
   },
+  {path: "**", redirectTo: 'inicio'}
 ];

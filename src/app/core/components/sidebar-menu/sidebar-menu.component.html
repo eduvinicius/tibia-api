@@ -1,12 +1,22 @@
-<div
-    class="bg-tertiary height shadow-center">
-    <ul class="flex flex-col gap-2 w-full p-2">
-      @for (item of sideBarItens(); track $index) {
-        <li>
-          <a [routerLink]="item.route">
-            {{ item.title }}
-          </a>
-        </li>
-      }
-    </ul>
-</div>
+
+<section class="flex flex-col gap-4 h-full mt-5">
+  <img
+    src="../../../../assets/images/warning-druid.png"
+    alt="druida"
+    class="h-[150px]">
+  <nav
+      class="bg-tertiary shadow-center">
+      <ul class="flex flex-col gap-2 w-full p-2">
+        @for (item of sideBarItens(); track $index) {
+          <li class="w-full">
+            <a
+              class="w-full flex"
+              [routerLink]="item.route"
+              routerLinkActive="active">
+              {{ item.title }}
+            </a>
+          </li>
+        }
+      </ul>
+  </nav>
+</section>

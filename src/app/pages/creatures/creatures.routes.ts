@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const creaturesRoutes: Routes = [
   {
-    path: 'criaturas',
+    path: '',
     loadComponent: () => import('./pages/creatures/creatures.component').then(m => m.CreaturesComponent)
   },
   {

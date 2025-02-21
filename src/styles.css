@@ -53,12 +53,10 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: #5a2800;
+  @apply text-primary cursor-pointer decoration-0 hover:text-secondary;
   transition: .3s;
-
-  &:hover {
-    color: #D2691E;
-  }
 }
 
+img {
+  transition: .3s;
+}

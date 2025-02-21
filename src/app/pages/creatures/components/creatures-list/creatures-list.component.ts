@@ -1,4 +1,4 @@
-import { Component, Input, TrackByFunction } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 import { RouterModule } from '@angular/router';
 
@@ -10,9 +10,5 @@ import { RouterModule } from '@angular/router';
     imports: [RouterModule]
 })
 export class CreaturesListComponent {
-  @Input() visibleCreatures: ICreaturesListModel[] | null = [];
-
-  public trackCreatureList(index: number): number {
-    return index;
-  }
+  visibleCreatures = input<ICreaturesListModel[] | null>([]);
 }

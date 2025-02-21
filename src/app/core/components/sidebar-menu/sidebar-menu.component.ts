@@ -1,5 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ISideBarItens } from './sidebar.interface';
 import { SIDE_BAR_ITENS } from './sidebar-itens.const';
 
@@ -8,15 +8,12 @@ import { SIDE_BAR_ITENS } from './sidebar-itens.const';
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.css'],
   standalone: true,
-  imports: [RouterLink]
+  imports: [RouterLink, RouterLinkActive]
 })
-export class SidebarMenuComponent implements OnInit {
+export class SidebarMenuComponent {
 
   sideBarItens = signal<ISideBarItens[]>(SIDE_BAR_ITENS);
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
