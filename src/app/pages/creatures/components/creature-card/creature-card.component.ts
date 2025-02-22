@@ -5,6 +5,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { FormatListPipe } from 'src/app/shared/pipes/formatList.pipe';
+import { AsyncPipe } from '@angular/common';
 
 
 
@@ -13,7 +14,7 @@ import { FormatListPipe } from 'src/app/shared/pipes/formatList.pipe';
     templateUrl: './creature-card.component.html',
     styleUrls: ['./creature-card.component.css'],
     standalone: true,
-    imports: [LoaderComponent, FormatListPipe]
+    imports: [LoaderComponent, FormatListPipe, AsyncPipe]
 })
 
 export class CreatureCardComponent implements OnInit, OnDestroy {

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { ICreaturesResponseDTO, ICreaturesListModel } from '../interfaces/ICreaturesList';
-import { ICreatureModel, ICreatureResponseDTO } from '../interfaces/ICreature';
-import { IBossesListModel, IBossesResponseDTO } from '../interfaces/IBossesList';
-import { CreaturesListMapper } from '../mappers/creaturesListMapper';
-import { CreatureMapper } from '../mappers/creatureMapper';
-import { BossesListMapper } from '../mappers/bossesListMapper';
+import { ICreaturesResponseDTO, ICreaturesListModel } from '../../pages/creatures/interfaces/ICreaturesList';
+import { ICreatureModel, ICreatureResponseDTO } from '../../pages/creatures/interfaces/ICreature';
+import { IBossesListModel, IBossesResponseDTO } from '../../pages/creatures/interfaces/IBossesList';
+import { CreaturesListMapper } from '../../pages/creatures/mappers/creaturesListMapper';
+import { CreatureMapper } from '../../pages/creatures/mappers/creatureMapper';
+import { BossesListMapper } from '../../pages/creatures/mappers/bossesListMapper';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,6 @@ export class CreaturesService {
   }
 
   private _handleError(error: Error): Observable<never> {
-    console.error(`Ocorreu um erro: ${error}`);
-    return throwError(error);
+    return throwError(() => new Error(error.message));
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IBossesListModel } from '../../interfaces/IBossesList';
-import { CreaturesService } from '../../services/creatures.service';
+import { CreaturesService } from '../../../../core/api/creatures.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';

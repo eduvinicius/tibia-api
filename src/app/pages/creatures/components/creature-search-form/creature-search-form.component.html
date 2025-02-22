@@ -12,9 +12,16 @@
     <input type="submit" class="creature-search-form-submit">
   </form>
 
-  <div class="error-message" *ngIf="creatureFormService.creatureName.invalid && formDir.submitted && (creatureFormValidation | async)">
-    <span *ngIf="creatureFormService.creatureName.errors?.['required']">O nome da criatura é obrigatório!</span>
-  </div>
+  @if (
+    creatureFormService.creatureName.invalid &&
+    formDir.submitted &&
+    (creatureFormValidation | async) &&
+    creatureFormService.creatureName.errors?.['required']
+    ) {
+    <div class="error-message">
+      <span>O nome da criatura é obrigatório!</span>
+    </div>
+  }
 </section>
 
 

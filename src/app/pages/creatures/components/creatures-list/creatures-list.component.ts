@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
-import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 import { RouterModule } from '@angular/router';
 
+import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 @Component({
     selector: 'app-creatures-list',
     templateUrl: './creatures-list.component.html',

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CreaturesService } from '../../services/creatures.service';
+import { CreaturesService } from '../../../../core/api/creatures.service';
 import { ICreatureModel } from '../../interfaces/ICreature';
 import { Subject, takeUntil } from 'rxjs';
 import { CreatureFormService } from '../../services/creature-form.service';

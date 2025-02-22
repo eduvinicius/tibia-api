@@ -1,18 +1,19 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ICreatureModel } from '../../interfaces/ICreature';
-import { CreaturesService } from '../../services/creatures.service';
+import { CreaturesService } from '../../../../core/api/creatures.service';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ICreatureForm } from '../../interfaces/ICreatureForm';
 import { BehaviorSubject } from 'rxjs';
 import { CreatureFormService } from '../../services/creature-form.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-creature-search-form',
     templateUrl: './creature-search-form.component.html',
     styleUrls: ['./creature-search-form.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule]
+    imports: [ReactiveFormsModule, AsyncPipe]
 })
 
 export class CreatureSearchFormComponent {

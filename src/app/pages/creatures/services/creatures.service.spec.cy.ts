@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CreaturesService } from './creatures.service';
+import { CreaturesService } from '../../../core/api/creatures.service';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { lastValueFrom } from 'rxjs';

@@ -24,7 +24,6 @@ export class CharactersService {
   }
 
   private handleError(error: Error): Observable<never> {
-    console.error(`Ocorreu um erro: ${error}`);
-    return throwError(error);
+    return throwError(() => new Error(error.message));
   }
 }

@@ -1,5 +1,7 @@
 <section class="flex flex-wrap justify-center items-center w-[80%] m-auto h-[400px] overflow-auto">
+
   @if (visibleCreatures()) {
+
     @for (creature of visibleCreatures(); track $index) {
       <div class="w-[15%] h-24 m-4 rounded-2xl text-center ease-in-out transform hover:scale-105">
         <a
@@ -10,7 +12,9 @@
         </a>
       </div>
     }
+
   } @else {
     <p class="text-center text-primary">Nenhuma criatura encontrada</p>
   }
+
 </section>

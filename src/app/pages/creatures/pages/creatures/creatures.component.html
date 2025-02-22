@@ -14,13 +14,13 @@
       Caso queira visualizar uma lista de bosses,
       <a routerLink="/criaturas/bosses" class="font-700">Clique aqui!</a>
     </p>
-    <p>Número de criaturas na lista: {{ (visibleCreatures() | async)?.length }}</p>
+    <p>Número de criaturas na lista: {{ (visibleCreatures()).length }}</p>
 
-    @if (loaderService.loading$ | async) {
+    @if (loaderService.loading()) {
       <app-loader></app-loader>
     } @else {
       <app-creatures-list
-        [visibleCreatures]="visibleCreatures() | async"
+        [visibleCreatures]="visibleCreatures()"
       >
       </app-creatures-list>
       <app-button [btnTitle]="btnTitle()" (click)="loadNextPageOfCreatures()"></app-button>
