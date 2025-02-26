@@ -1,56 +1,36 @@
-<section class="creature-search">
-  <app-loader class="creature-search-loader" *ngIf="isLoading"></app-loader>
-  <div class="creature-search-card" *ngIf="creature | async as creature; else elseBlock">
-    <ng-container *ngIf="creature.name; else elseBlock">
-      <img class="creature-search-card-img" src="{{creature.image}}" alt="">
-      <h3 class="creature-search-card-title">
-        <span class="creature-search-card-span">Nome:</span> {{ creature.name }}
-      </h3>
-      <div class="creature-search-card-description">
-        <p>
-          <span class="creature-search-card-span">Descrição:</span> {{ creature.description }}
-        </p>
+<section class="flex flex-col items-center justify-center gap-3 w-[80%] mx-auto">
+  @if (loadingService.loading()) {
+    <app-loader class=""></app-loader>
+  }
+  @if (creature() && hasCreature()) {
+    <img class="w-30 h-30" src="{{creature()?.image}}" [alt]="creature()?.name" />
+    <p>
+      <span class="text-primary">Nome:</span>
+      {{ creature()?.name }}
+    </p>
+    <p>
+      <span class="text-primary">Descrição:</span> {{ creature()?.description }}
+    </p>
+    <div>
+      <div class="grid grid-cols-12 items-center w-full text-center text-primary text-xl border border-primary ">
+        <p class="col-span-2">Imunidade</p>
+        <p class="col-span-2">Fortes contra</p>
+        <p class="col-span-2">Fraqueza</p>
+        <p class="col-span-1">HP</p>
+        <p class="col-span-2">Pontos de XP</p>
+        <p class="col-span-3">Loot</p>
       </div>
-      <ul class="creature-search-card-behavior">
-        <li *ngIf="creature?.immune">
-          <span
-            class="creature-search-card-span">
-            Imunidade:
-          </span>
-          {{ creature.immune | formatList }}
-        </li>
-        <li *ngIf="creature?.strong">
-          <span
-            class="creature-search-card-span">
-            Forte contra:
-          </span>
-          {{ creature.strong | formatList }}
-        </li>
-        <li *ngIf="creature?.weakness">
-          <span
-            class="creature-search-card-span">
-            Fraqueza:
-          </span>
-          {{ creature.weakness | formatList }}
-        </li>
-      </ul>
-      <p class="creature-search-card-hp">
-        <span class="creature-search-card-span">HP:</span> {{ creature.hitpoints }}
-      </p>
-      <p class="creature-search-card-exp">
-        <span class="creature-search-card-span">Pontos de Experiência:</span> {{ creature.experiencePoints }}
-      </p>
-      <p class="creature-search-card-loot">
-        <span class="creature-search-card-span">Loot:</span> {{ creature.lootList | formatList }}
-      </p>
-    </ng-container>
-  </div>
-  <ng-template #elseBlock>
-    <div *ngIf="creature | async as creature">
-      <ng-container *ngIf="!creature.name">
-        <h1 class="else-title" >Não existe uma criatura com este nome!</h1>
-      </ng-container>
+      <div class="grid grid-cols-12 items-center w-full text-center border border-primary rounded-md">
+        <p class="col-span-2">{{ creature()?.immune ?? [] | formatList }}</p>
+        <p class="col-span-2">{{ creature()?.strong ?? [] | formatList }}</p>
+        <p class="col-span-2">{{ creature()?.weakness ?? [] | formatList }}</p>
+        <p class="col-span-1">{{ creature()?.hitpoints }}</p>
+        <p class="col-span-2">{{ creature()?.experiencePoints }}</p>
+        <p class="col-span-3">{{ creature()?.lootList ?? [] | formatList }}</p>
+      </div>
     </div>
-  </ng-template>
+  } @else if (creature() && creature() !== null) {
+    <h1 class="text-primary text-nowrap" >Não existe uma criatura com este nome!</h1>
+  }
 </section>
 

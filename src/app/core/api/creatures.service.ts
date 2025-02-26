@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { environment } from 'src/environments/environments';
+
 import { Observable, catchError, map, throwError } from 'rxjs';
+
 import { ICreaturesResponseDTO, ICreaturesListModel } from '../../pages/creatures/interfaces/ICreaturesList';
 import { ICreatureModel, ICreatureResponseDTO } from '../../pages/creatures/interfaces/ICreature';
 import { IBossesListModel, IBossesResponseDTO } from '../../pages/creatures/interfaces/IBossesList';
+
 import { CreaturesListMapper } from '../../pages/creatures/mappers/creaturesListMapper';
 import { CreatureMapper } from '../../pages/creatures/mappers/creatureMapper';
 import { BossesListMapper } from '../../pages/creatures/mappers/bossesListMapper';
+
+import { formatEmptySpaceString } from 'src/app/shared/utils/format-empty-space';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +23,7 @@ export class CreaturesService {
   private readonly _apiCreatureURL: string = environment.apiURLCreature;
   private readonly _apiCreatureByRaceURL: string = environment.URLCreatureByRace;
   private readonly _apiBossesURL: string = environment.apiURLBosses;
+
   private readonly _creatureListMapper = new CreaturesListMapper();
   private readonly _creatureMapper = new CreatureMapper();
   private readonly _bossesListMapper = new BossesListMapper();
@@ -32,7 +39,8 @@ export class CreaturesService {
   }
 
   public getCreatureByRace(race: string): Observable<ICreatureModel> {
-    return this._http.get<ICreatureResponseDTO>(`${this._apiCreatureByRaceURL}${race}`)
+    const formattedRace = formatEmptySpaceString(race, true);
+    return this._http.get<ICreatureResponseDTO>(`${this._apiCreatureByRaceURL}${formattedRace}`)
       .pipe(
         map(response => this._creatureMapper.mapFrom(response)),
         catchError(error => this._handleError(error))

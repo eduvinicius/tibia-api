@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, take } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ICreatureModel } from '../interfaces/ICreature';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class CreatureFormService {
 
 constructor() { }
 
- private _creatureData$ = new Subject<ICreatureModel>()
+ private readonly _creatureData$ = new Subject<ICreatureModel>()
  public creatureData$ = this._creatureData$.asObservable();
 
  public notifyOnCreatureChanged(creatureData: ICreatureModel): void {

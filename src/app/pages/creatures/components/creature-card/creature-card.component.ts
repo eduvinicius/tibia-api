@@ -1,48 +1,42 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+import { Observable, map } from 'rxjs';
+
 import { ICreatureModel } from '../../interfaces/ICreature';
+
 import { CreatureFormService } from '../../services/creature-form.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
-import { Observable, Subject, map, takeUntil } from 'rxjs';
+
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+
 import { FormatListPipe } from 'src/app/shared/pipes/formatList.pipe';
-import { AsyncPipe } from '@angular/common';
-
-
-
 @Component({
     selector: 'app-creature-card',
     templateUrl: './creature-card.component.html',
     styleUrls: ['./creature-card.component.css'],
     standalone: true,
-    imports: [LoaderComponent, FormatListPipe, AsyncPipe]
+    imports: [LoaderComponent, FormatListPipe]
 })
 
-export class CreatureCardComponent implements OnInit, OnDestroy {
-  private _onDestroy$: Subject<void> = new Subject<void>();
-  public creature = this.getCreatureData();
-  public isLoading: boolean = false;
+export class CreatureCardComponent {
 
-  constructor(private _creatureFormService: CreatureFormService, private _loadingService: LoaderService) {}
+  public creature = toSignal(this.getCreatureData(), { initialValue: null});
 
-  ngOnInit(): void {
-    this.loading();
-  }
+  constructor(
+    private readonly _creatureFormService: CreatureFormService,
+    public loadingService: LoaderService
+  ) {}
+
+  hasCreature = computed(() => {
+    return this.creature() && this.creature()?.name !== 'Error';
+  });
 
   public getCreatureData(): Observable<ICreatureModel> {
-    return this._creatureFormService.creatureData$.pipe(map((creature) => {
-      return creature;
-    }));
-  }
-
-  public loading(): void {
-    this._loadingService.loading$
-    .pipe(takeUntil(this._onDestroy$))
-    .subscribe((isLoading) => {
-      this.isLoading = isLoading
-    })
-  }
-
- public ngOnDestroy(): void {
-    this._onDestroy$.next();
+    return this._creatureFormService.creatureData$.pipe(
+      map((creature) => {
+        return creature;
+        })
+      );
   }
 }

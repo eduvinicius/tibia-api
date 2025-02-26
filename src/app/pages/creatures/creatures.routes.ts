@@ -7,12 +7,12 @@ export const creaturesRoutes: Routes = [
     loadComponent: () => import('./pages/creatures/creatures.component').then(m => m.CreaturesComponent)
   },
   {
-    path: 'detalhes/:id',
-    loadComponent: () => import('./pages/creature-details/creature-details.component').then(m => m.CreatureDetailsComponent)
-  },
-  {
     path: 'pesquisa',
     loadComponent: () => import('./pages/creature-search/creature-search.component').then(m => m.CreatureSearchComponent)
+  },
+  {
+    path: 'detalhes/:id',
+    loadComponent: () => import('./pages/creature-details/creature-details.component').then(m => m.CreatureDetailsComponent)
   },
   {
     path: 'bosses',
