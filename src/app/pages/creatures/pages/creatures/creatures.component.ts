@@ -1,14 +1,15 @@
 import { RouterLink } from '@angular/router';
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 
 import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 
-import { CreaturesService } from '../../../../core/api/creatures.service';
+import { CreaturesService } from 'src/app/shared/services/api/creatures.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { CreaturesListComponent } from '../../components/creatures-list/creatures-list.component';
 import { ButtonComponent } from '../../components/button/button.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
     selector: 'app-creatures',
     templateUrl: './creatures.component.html',
@@ -27,6 +28,7 @@ export class CreaturesComponent implements OnInit {
     private readonly _creaturesList = signal<ICreaturesListModel[]>([]);
     private readonly _chunkSize: number = 10;
     private readonly _currentPage = signal<number>(1);
+    private readonly _destroyRef = inject(DestroyRef);
 
     public btnTitle = signal<string>('Ver mais');
 
@@ -42,16 +44,18 @@ export class CreaturesComponent implements OnInit {
 
     getCreaturesListData(): void {
       this.loaderService.setLoading(true);
-       this._creaturesService.getAllCreatures().subscribe({
-        next: (creaturesData: ICreaturesListModel[]) => {
-          this._creaturesList.set(creaturesData);
-          this.loaderService.setLoading(false);
-        },
-        error: (error: Error) => {
-          console.log(error);
-          this.loaderService.setLoading(false);
-        }
-      });
+       this._creaturesService.getAllCreatures()
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe({
+          next: (creaturesData: ICreaturesListModel[]) => {
+            this._creaturesList.set(creaturesData);
+            this.loaderService.setLoading(false);
+          },
+          error: (error: Error) => {
+            console.log(error);
+            this.loaderService.setLoading(false);
+          }
+        });
     };
 
     loadNextPageOfCreatures(): void {

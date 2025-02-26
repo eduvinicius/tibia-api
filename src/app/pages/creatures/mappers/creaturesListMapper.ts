@@ -1,4 +1,4 @@
-import { ICreaturesListModel, ICreaturesListResponseDTO, ICreaturesResponseDTO } from "../interfaces/ICreaturesList";
+import { ICreaturesListModel, ICreaturesResponseDTO } from "../interfaces/ICreaturesList";
 
 export class CreaturesListMapper {
 

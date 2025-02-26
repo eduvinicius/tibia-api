@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { CharactersService } from '../../../../core/api/characters.service';
+import { CharactersService } from 'src/app/shared/services/api/characters.service';
 
 import { ICharacterModel } from '../../interfaces/ICharacters';
 import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs';

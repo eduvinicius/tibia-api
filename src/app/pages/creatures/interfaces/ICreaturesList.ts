@@ -1,4 +1,4 @@
-import { IBaseInformation } from "../../../Interfaces/IBaseInformation"
+import { IBaseInformation } from "../../../shared/Interfaces/IBaseInformation"
 
 export interface ICreaturesResponseDTO extends IBaseInformation {
   creatures: {

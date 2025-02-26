@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { ICharacterModel, ICharacterResponseDTO } from '../../pages/characters/interfaces/ICharacters';
-import { CharacterMapper } from '../../pages/characters/mappers/characterMapper';
+import { ICharacterModel, ICharacterResponseDTO } from 'src/app/pages/characters/interfaces/ICharacters';
+import { CharacterMapper } from 'src/app/pages/characters/mappers/characterMapper';
+
 
 @Injectable({
   providedIn: 'root'

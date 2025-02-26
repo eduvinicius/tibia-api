@@ -1,7 +1,7 @@
 import { Component, effect, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CreaturesService } from '../../../../core/api/creatures.service';
+import { CreaturesService } from 'src/app/shared/services/api/creatures.service';
 
 import { ICreatureModel } from '../../interfaces/ICreature';
 import { ICreatureForm } from '../../interfaces/ICreatureForm';

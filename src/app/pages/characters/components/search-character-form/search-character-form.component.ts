@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { CharactersService } from '../../../../core/api/characters.service';
+import { CharactersService } from 'src/app/shared/services/api/characters.service';
 import { ICharacterModel } from '../../interfaces/ICharacters';
 import { ICharForm } from '../../interfaces/ICharForm';
 import { CharacterFormService } from '../../services/character-form.service';

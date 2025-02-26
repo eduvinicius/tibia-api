@@ -1,13 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CreaturesService } from '../../../../core/api/creatures.service';
-import { ICreatureModel } from '../../interfaces/ICreature';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { CreaturesService } from 'src/app/shared/services/api/creatures.service';
 import { CreatureFormService } from '../../services/creature-form.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+
+import { ICreatureModel } from '../../interfaces/ICreature';
+
 import { CreatureCardComponent } from '../../components/creature-card/creature-card.component';
-
-
 @Component({
     selector: 'app-creature-details',
     templateUrl: './creature-details.component.html',
@@ -16,17 +17,17 @@ import { CreatureCardComponent } from '../../components/creature-card/creature-c
     imports: [CreatureCardComponent]
 })
 
-export class CreatureDetailsComponent implements OnInit, OnDestroy {
+export class CreatureDetailsComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute,
-    private creatureService: CreaturesService,
-    public creatureFormService: CreatureFormService,
-    private _loaderService: LoaderService
+    private readonly route: ActivatedRoute,
+    private readonly creatureService: CreaturesService,
+    private readonly _loaderService: LoaderService,
+    public creatureFormService: CreatureFormService
     ) { }
 
-    private _race: string = '';
-    private _onDestroy$ = new Subject<void>();
+    private readonly _race = signal<string>('');
+    private readonly _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.getParamsUrl();
@@ -35,16 +36,16 @@ export class CreatureDetailsComponent implements OnInit, OnDestroy {
 
   public getParamsUrl():void {
     this.route.params
-    .pipe(takeUntil(this._onDestroy$))
+    .pipe(takeUntilDestroyed(this._destroyRef))
     .subscribe(params => {
-      this._race =  params['id']
+      this._race.set(params['id']);
     })
   }
 
   public getCreatureByRace(): void {
     this._loaderService.setLoading(true);
-    this.creatureService.getCreatureByRace(this._race)
-    .pipe(takeUntil(this._onDestroy$))
+    this.creatureService.getCreatureByRace(this._race())
+    .pipe(takeUntilDestroyed(this._destroyRef))
     .subscribe({
       next: (data: ICreatureModel) => {
         this.creatureFormService.notifyOnCreatureChanged(data)
@@ -56,8 +57,4 @@ export class CreatureDetailsComponent implements OnInit, OnDestroy {
       }
     });
   };
-
-  ngOnDestroy(): void {
-    this._onDestroy$.next();
-  }
 }

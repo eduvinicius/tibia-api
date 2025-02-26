@@ -1,4 +1,4 @@
-import { IBaseInformation } from "src/app/Interfaces/IBaseInformation";
+import { IBaseInformation } from "src/app/shared/Interfaces/IBaseInformation";
 
 export interface IWorldsDetails extends IBaseInformation {
   worlds: {

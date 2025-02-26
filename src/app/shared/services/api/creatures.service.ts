@@ -5,15 +5,15 @@ import { environment } from 'src/environments/environments';
 
 import { Observable, catchError, map, throwError } from 'rxjs';
 
-import { ICreaturesResponseDTO, ICreaturesListModel } from '../../pages/creatures/interfaces/ICreaturesList';
-import { ICreatureModel, ICreatureResponseDTO } from '../../pages/creatures/interfaces/ICreature';
-import { IBossesListModel, IBossesResponseDTO } from '../../pages/creatures/interfaces/IBossesList';
-
-import { CreaturesListMapper } from '../../pages/creatures/mappers/creaturesListMapper';
-import { CreatureMapper } from '../../pages/creatures/mappers/creatureMapper';
-import { BossesListMapper } from '../../pages/creatures/mappers/bossesListMapper';
-
 import { formatEmptySpaceString } from 'src/app/shared/utils/format-empty-space';
+
+import { IBossesListModel, IBossesResponseDTO } from 'src/app/pages/creatures/interfaces/IBossesList';
+import { ICreatureModel, ICreatureResponseDTO } from 'src/app/pages/creatures/interfaces/ICreature';
+import { ICreaturesListModel, ICreaturesResponseDTO } from 'src/app/pages/creatures/interfaces/ICreaturesList';
+
+import { BossesListMapper } from 'src/app/pages/creatures/mappers/bossesListMapper';
+import { CreatureMapper } from 'src/app/pages/creatures/mappers/creatureMapper';
+import { CreaturesListMapper } from 'src/app/pages/creatures/mappers/creaturesListMapper';
 
 @Injectable({
   providedIn: 'root'
