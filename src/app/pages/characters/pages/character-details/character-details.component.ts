@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ActivatedRoute } from '@angular/router';
 
 import { CharactersService } from 'src/app/shared/services/api/characters.service';
 
 import { ICharacterModel } from '../../interfaces/ICharacters';
-import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { CharacterTableComponent } from '../../components/character-table/character-table.component';
@@ -20,10 +21,10 @@ import { CharacterTableComponent } from '../../components/character-table/charac
 export class CharacterDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
-    private _route: ActivatedRoute,
-    private _characterService: CharactersService,
-    private _charData: CharacterFormService,
-    private _loader: LoaderService
+    private readonly _route: ActivatedRoute,
+    private readonly _characterService: CharactersService,
+    private readonly _charData: CharacterFormService,
+    private readonly _loader: LoaderService
   ) {}
 
   private _characterID: string = '';

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { ICharacterModel } from '../interfaces/ICharacters';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
@@ -8,12 +8,12 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 })
 export class CharacterFormService {
 
-  private _characterData$ = new Subject<ICharacterModel>()
+  private readonly _characterData$ = new Subject<ICharacterModel | null>()
   public characterData$ = this._characterData$.asObservable();
   public characterForm = this.createCharForm();
-  public charFormValidation$ = new BehaviorSubject<boolean>(false);
+  public charFormValidation = signal<boolean>(false);
 
-  public triggerCharacterData(character: ICharacterModel): void {
+  public triggerCharacterData(character: ICharacterModel | null): void {
     this._characterData$.next(character);
   }
 

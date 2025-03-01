@@ -1,5 +1,6 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CreaturesService } from 'src/app/shared/services/api/creatures.service';
 
@@ -19,6 +20,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 
 export class CreatureSearchFormComponent {
 
+  private readonly _destroyRef = inject(DestroyRef);
   public creatureFormValidation = signal<boolean>(false);
   timeoutDuration = signal<number | null>(null);
 
@@ -27,6 +29,7 @@ export class CreatureSearchFormComponent {
     private readonly _loaderService: LoaderService,
     public creatureFormService: CreatureFormService,
     ) {
+
       effect(() => {
         const duration = this.timeoutDuration();
         if (duration === null) return;
@@ -36,6 +39,7 @@ export class CreatureSearchFormComponent {
         }, duration);
         return () => clearTimeout(timeoutId);
       });
+
     }
 
   submitForm(): void {
@@ -43,6 +47,7 @@ export class CreatureSearchFormComponent {
       this._loaderService.setLoading(true);
       const formData = this.creatureFormService.creatureForm.value as ICreatureForm;
       this._creaturesService.getCreatureByRace(formData.creatureName)
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (response: ICreatureModel) => {
           this.creatureFormService.notifyOnCreatureChanged(response);

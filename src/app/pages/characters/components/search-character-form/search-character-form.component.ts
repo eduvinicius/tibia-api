@@ -1,32 +1,46 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { CharacterFormService } from '../../services/character-form.service';
 import { CharactersService } from 'src/app/shared/services/api/characters.service';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+
 import { ICharacterModel } from '../../interfaces/ICharacters';
 import { ICharForm } from '../../interfaces/ICharForm';
-import { CharacterFormService } from '../../services/character-form.service';
-import { LoaderService } from 'src/app/shared/services/loader.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-search-character-form',
     templateUrl: './search-character-form.component.html',
     styleUrls: ['./search-character-form.component.css'],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, AsyncPipe]
+    imports: [FormsModule, ReactiveFormsModule]
 })
 
-export class SearchCharacterFormComponent implements OnDestroy {
+export class SearchCharacterFormComponent {
 
-  private readonly _onDestroy$ = new Subject<void>();
+  private readonly _destroyRef = inject(DestroyRef);
+  timeoutDuration = signal<number | null>(null);
 
   constructor(
     private readonly _characterService: CharactersService,
     private readonly _loader: LoaderService,
     public charForm: CharacterFormService
-    ) {}
+    ) {
 
-  submitForm() {
+      effect(() => {
+        const duration = this.timeoutDuration();
+        if (duration === null) return;
+        const timeoutId = setTimeout(() => {
+          this.charForm.charFormValidation.set(false)
+          this.timeoutDuration.set(null);
+        }, duration);
+        return () => clearTimeout(timeoutId);
+      });
+
+    }
+
+  submitForm(): void {
 
     if (this.charForm.characterForm.valid) {
       this._loader.setLoading(true);
@@ -34,32 +48,30 @@ export class SearchCharacterFormComponent implements OnDestroy {
       return
     }
 
-    this.charForm.charFormValidation$.next(true);
+    this.charForm.charFormValidation.set(true);
     this.handleTimeout(3000);
   };
 
   private _handleCharacterData(): void {
     const formData = this.charForm.characterForm.value as ICharForm;
-    this._characterService.getCharByName(formData.charName).pipe(takeUntil(this._onDestroy$)).subscribe({
+    this._characterService.getCharByName(formData.charName)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
       next: (character: ICharacterModel) => {
         this.charForm.triggerCharacterData(character)
-      this._loader.setLoading(false);
+        this._loader.setLoading(false);
       },
       error: (error) => {
         console.log(error)
+        this.charForm.triggerCharacterData(null);
         this._loader.setLoading(false);
       }
     });
     this.charForm.characterForm.reset();
+    this.handleTimeout(3000);
   }
 
   public handleTimeout(time: number): void {
-    setTimeout(() => {
-      this.charForm.charFormValidation$.next(false)
-    }, time)
-  }
-
-  ngOnDestroy(): void {
-    this._onDestroy$.next();
+    this.timeoutDuration.set(time);
   }
 }

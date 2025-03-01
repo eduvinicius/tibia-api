@@ -1,16 +1,28 @@
-<form [formGroup]="charForm.characterForm" class="character-search-form" (ngSubmit)="submitForm()" #formDir="ngForm">
-  <label for="search" class="character-search-form-label">Personagem:</label>
+<form
+  [formGroup]="charForm.characterForm"
+  class="flex gap-3 items-center"
+  (ngSubmit)="submitForm()" #formDir="ngForm">
   <input
     type="text"
-    class="character-search-form-input"
+    class="tibia-input"
     placeholder="Digite o nome"
     id="search"
     name="search"
     formControlName="charName"
   >
-  <input type="submit" class="character-search-form-submit">
 
-  <!-- <div class="error-message" *ngIf="charForm.charName.invalid && formDir.submitted && (charForm.charFormValidation$ | async)">
-    <span *ngIf="charForm.charName.errors?.['required']">O nome do personagem é obrigatório!</span>
-  </div> -->
+  <button
+    type="submit"
+    class="tibia-btn">
+    Pesquisar
+  </button>
 </form>
+  @if (
+    charForm.charName.invalid &&
+    formDir.submitted &&
+    (charForm.charFormValidation()) &&
+    charForm.charName.errors?.['required']) {
+    <div class="text-error">
+      <span>O nome do personagem é obrigatório!</span>
+    </div>
+  }

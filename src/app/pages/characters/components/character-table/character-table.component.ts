@@ -1,39 +1,35 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ICharacterModel } from '../../interfaces/ICharacters';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { CharacterFormService } from '../../services/character-form.service';
-import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
-import { LoaderService } from 'src/app/shared/services/loader.service';
-import { AsyncPipe, DatePipe } from '@angular/common';
-import { HasCommentPipe } from 'src/app/shared/pipes/hasComment.pipe';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { CharacterFormService } from '../../services/character-form.service';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+
+import { ICharacterModel } from '../../interfaces/ICharacters';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+
+import { HasCommentPipe } from 'src/app/shared/pipes/hasComment.pipe';
 @Component({
     selector: 'app-character-table',
     templateUrl: './character-table.component.html',
     styleUrls: ['./character-table.component.css'],
     standalone: true,
-    imports: [LoaderComponent, DatePipe, HasCommentPipe, AsyncPipe]
+    imports: [LoaderComponent, DatePipe, HasCommentPipe]
 })
 
-export class CharacterTableComponent implements OnInit, OnDestroy  {
+export class CharacterTableComponent implements OnInit  {
 
- public characterData$ = new BehaviorSubject<ICharacterModel | null>(null);
- public isLoading$ = new BehaviorSubject<boolean | null>(null);
- private _onDestroy$ = new Subject<void>();
+ public characterData = signal<ICharacterModel | null>({} as ICharacterModel);
+ private readonly _destroyRef = inject(DestroyRef);
 
- constructor(private _charData: CharacterFormService, private _loader: LoaderService) {}
+ constructor(
+    private readonly _charData: CharacterFormService,
+    public loader: LoaderService
+  ) {}
 
  ngOnInit(): void {
-   this._charData.characterData$.pipe(takeUntil(this._onDestroy$)).subscribe((char) => {
-     this.characterData$.next(char)
-   })
-
-   this._loader.loading$.pipe(takeUntil(this._onDestroy$)).subscribe((value) => {
-    this.isLoading$.next(value)
+   this._charData.characterData$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((char) => {
+     this.characterData.set(char)
    })
  }
-
-  ngOnDestroy(): void {
-    this._onDestroy$.next();
-  }
 }
