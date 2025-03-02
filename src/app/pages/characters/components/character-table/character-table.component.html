@@ -1,0 +1,30 @@
+<section class="flex justify-center items-center">
+
+  @if (loader.loading()) {
+    <app-loader></app-loader>
+  }
+
+  @if (characterData() && characterData()?.name && !loader.loading()) {
+    <table class="tibia-table">
+      <caption class="tibia-table-title">Informações do Personagem</caption>
+      <th></th>
+      <tbody class="tibia-table-body">
+        <tr><td>Nome</td><td>{{ characterData()?.name }}</td></tr>
+        <tr><td>Sexo</td><td>{{ characterData()?.sex }}</td></tr>
+        <tr><td>Vocação</td><td>{{ characterData()?.vocation }}</td></tr>
+        <tr><td>Nível</td><td>{{ characterData()?.level }}</td></tr>
+        <tr><td>Pontos de Conquista</td><td>{{ characterData()?.achievementPoints }}</td></tr>
+        <tr><td>Mundo</td><td>{{ characterData()?.world }}</td></tr>
+        <tr><td>Residência</td><td>{{ characterData()?.residence }}</td></tr>
+        <tr><td>Último login</td><td>{{ characterData()?.last_login | date: 'dd/MM/yyyy' }}</td></tr>
+        <tr><td>Status da Conta</td><td>{{ characterData()?.accountStatus }}</td></tr>
+        <tr><td>Comentário</td><td>{{ characterData()?.comment ?? "" | hasComment }}</td></tr>
+        <tr><td>Criação</td><td>{{ characterData()?.created | date: 'dd/MM/yyyy' }}</td></tr>
+      </tbody>
+    </table>
+  } @else if (!characterData() && !loader.loading()) {
+    <h1>Não há um personagem com este nome!</h1>
+  }
+</section>
+
+

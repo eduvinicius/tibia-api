@@ -1,0 +1,11 @@
+nav {
+  height: calc(50vh + 50px);
+  border-radius: var(--border-radius-md);
+}
+
+a.active {
+  color: var(--color-light);
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xs) var(--spacing-xs);
+}
