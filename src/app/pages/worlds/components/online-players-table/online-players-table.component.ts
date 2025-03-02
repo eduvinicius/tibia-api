@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { IWorldDetails } from '../../interfaces/IWorldDetails';
+import { Component, input} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { IWorldDetails } from '../../interfaces/IWorldDetails';
 @Component({
     selector: 'app-online-players-table',
     templateUrl: './online-players-table.component.html',
@@ -11,5 +11,5 @@ import { RouterLink } from '@angular/router';
 })
 export class OnlinePlayersTableComponent {
 
-  @Input() worldDetails: IWorldDetails | undefined;
+  worldDetails = input<IWorldDetails | null>(null);
 }

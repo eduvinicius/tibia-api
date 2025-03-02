@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { WorldsService } from '../../services/worlds.service';
-import { IRegularWorlds, IWorlds } from '../../interfaces/IWorlds';
-import { WorldsTableComponent } from '../../components/worlds-table/worlds-table.component';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { WorldsService } from 'src/app/shared/services/api/worlds.service';
+
+import { IRegularWorlds, IWorlds } from '../../interfaces/IWorlds';
+
+import { WorldsTableComponent } from '../../components/worlds-table/worlds-table.component';
 @Component({
     selector: 'app-worlds',
     templateUrl: './worlds.component.html',
@@ -14,21 +17,27 @@ import { WorldsTableComponent } from '../../components/worlds-table/worlds-table
 export class WorldsComponent implements OnInit {
 
 
-  constructor(private worldService: WorldsService) {}
+  private readonly _destroyRef = inject(DestroyRef);
+  public worlds = signal<IRegularWorlds[]>([]);
+  public isLoading = signal<boolean>(false);
 
-  worlds: IRegularWorlds[] = []
-  isLoading: boolean | undefined;
+  constructor(
+    private readonly worldService: WorldsService
+  ) {}
+
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.worldService.getWorlds().subscribe({
+    this.isLoading.set(true);
+    this.worldService.getWorlds()
+    .pipe(takeUntilDestroyed(this._destroyRef))
+    .subscribe({
      next: (world: IWorlds) => {
-        this.worlds = world.worlds.regular_worlds;
-        this.isLoading = false;
+        this.worlds.set(world.worlds.regular_worlds);
+        this.isLoading.set(false);
       },
       error: (error) => {
         console.log(error);
-        this.isLoading = false;
+        this.isLoading.set(false);
       }
     });
   };

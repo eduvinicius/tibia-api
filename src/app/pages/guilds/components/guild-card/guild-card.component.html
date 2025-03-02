@@ -1,31 +1,22 @@
-<app-loader class="loader" *ngIf="loader.loading$| async"></app-loader>
-<ng-container *ngIf="guildData.guildData$ | async as guild">
-  <ng-container *ngIf="guild && guild?.active; else elseBlock">
-    <div class="guild">
-      <div class="guild-card">
-        <img src="{{ guild?.logoUrl }}" alt="" class="guild-card-img">
-        <h3 class="guild-card-name">{{ guild?.name }}</h3>
-        <h4 class="guild-card-world">Mundo: {{ guild?.world }}</h4>
-        <h4 class="guild-card-title-description">Descrição:</h4>
-        <div class="guild-card-container-description">
-          <p class="guild-card-container-description-desc">
-            {{ guild?.description }}
-          </p>
-        </div>
-        <p class="guild-card-date">Data de Criação: {{ guild?.founded | date: 'dd/MM/yyyy' }} </p>
-        <p class="guild-card-players-online">Jogadores Online: {{ guild?.playersOnline }} </p>
-        <p class="guild-card-players-offline">Jogadores Offline: {{ guild?.playersOffline }} </p>
-        <p class="guild-card-total-members">Total de membros: {{ guild?.totalMembers }} </p>
+@if (guildFormService.guildData(); as guild) {
+  <div class="flex flex-col items-center justify-center gap-4">
+    <div class="flex flex-col justify-center items-center gap-2 bg-tertiary text-primary w-80 p-8 mt-8 rounded-2xl">
+      <img src="{{ guild?.logoUrl }}" alt="logo da guilda" class="w-24 mx-auto">
+      <h3>{{ guild?.name }}</h3>
+      <h4>Mundo: {{ guild?.world }}</h4>
+      <h4 class="">Descrição:</h4>
+      <div class="text-left overflow-y-auto h-30 p-2 my-3">
+        <p>
+          {{ guild?.description }}
+        </p>
       </div>
-      <app-guild-member-card [members]="guild?.members"></app-guild-member-card>
+      <p>Data de Criação: {{ guild?.founded | date: 'dd/MM/yyyy' }} </p>
+      <p>Jogadores Online: {{ guild?.playersOnline }} </p>
+      <p>Jogadores Offline: {{ guild?.playersOffline }} </p>
+      <p>Total de membros: {{ guild?.totalMembers }} </p>
     </div>
-  </ng-container>
-
-  <ng-template #elseBlock>
-    <div class="else-block" *ngIf="guild && !guild?.active ">
-      <h1>Não existe uma guilda com este nome</h1>
-    </div>
-  </ng-template>
-</ng-container>
+    <app-guild-member-card [members]="guild?.members"></app-guild-member-card>
+  </div>
+}
 
 

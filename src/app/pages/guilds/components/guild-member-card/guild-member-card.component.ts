@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { GuildFormService } from '../../services/guildForm.service';
 import { IGuildMembers } from '../../interfaces/IGuild';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 
 export class GuildMemberCardComponent {
 
-  @Input() members: IGuildMembers[] | undefined = []
+  members = input< IGuildMembers[] | undefined>([])
   constructor(public guildData: GuildFormService) {}
 
 }

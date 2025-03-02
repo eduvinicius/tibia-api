@@ -1,10 +1,18 @@
-<section class="guild">
-  <h1 class="guild-title">Guildas</h1>
-  <p class="guild-description">
+<section class="flex justify-center items-center flex-col gap-2">
+  <h1 class="text-2xl font-700">Guildas</h1>
+  <p>
     Nesta seção, você poderá pesquisar pelas guildas existentes no Tibia
   </p>
   <app-guild-search-form></app-guild-search-form>
-  <ng-container *ngIf="guildData.showGuildOnTemplate | async" >
-    <app-guild-card></app-guild-card>
-  </ng-container>
+  @if (loader.loading()) {
+    <app-loader class="loader"></app-loader>
+  } @else {
+
+    @if (guildFormService.guildData() && guildFormService.guildData()?.name) {
+      <app-guild-card></app-guild-card>
+    } @else if (!guildFormService.guildData()) {
+      <h1>Não existe uma guilda com este nome</h1>
+    }
+
+  }
 </section>

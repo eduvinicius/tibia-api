@@ -1,17 +1,24 @@
-<table class="online-players" *ngIf="worldDetails">
-  <caption class="online-players-title">Jogadores Online</caption>
-  <tbody class="online-players-body">
-    <tr>
-      <th>Nome</th>
-      <th>Nível</th>
-      <th>Vocação</th>
-    </tr>
-    <tr class="online-players-body-data" *ngFor="let character of worldDetails.world.online_players">
-      <a routerLink="/personagens/detalhes/{{ character.name }}">
-        <td>{{ character.name }}</td>
-      </a>
-      <td>{{ character.level }}</td>
-      <td>{{ character.vocation }}</td>
-    </tr>
-  </tbody>
-</table>
+@if (worldDetails(); as worldDetails) {
+  <table class="tibia-table">
+    <caption class="tibia-table-title">Jogadores Online</caption>
+    <tbody class="tibia-table-body">
+      <tr>
+        <th>Nome</th>
+        <th>Nível</th>
+        <th>Vocação</th>
+      </tr>
+      @for (character of worldDetails.world.online_players; track $index) {
+        <tr>
+          <td>
+            <a routerLink="/personagens/detalhes/{{ character.name }}">
+              {{ character.name }}
+            </a>
+          </td>
+          <td>{{ character.level }}</td>
+          <td>{{ character.vocation }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+

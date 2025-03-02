@@ -1,14 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
 import { ActivatedRoute } from '@angular/router';
 
 import { CharactersService } from 'src/app/shared/services/api/characters.service';
-
-import { ICharacterModel } from '../../interfaces/ICharacters';
-import { Subject, takeUntil } from 'rxjs';
 import { CharacterFormService } from '../../services/character-form.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+
+import { ICharacterModel } from '../../interfaces/ICharacters';
+
 import { CharacterTableComponent } from '../../components/character-table/character-table.component';
 
 @Component({
@@ -18,7 +17,7 @@ import { CharacterTableComponent } from '../../components/character-table/charac
     standalone: true,
     imports: [CharacterTableComponent]
 })
-export class CharacterDetailsComponent implements OnInit, OnDestroy {
+export class CharacterDetailsComponent implements OnInit {
 
   constructor(
     private readonly _route: ActivatedRoute,
@@ -27,19 +26,21 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
     private readonly _loader: LoaderService
   ) {}
 
-  private _characterID: string = '';
-  private _onDestroy$ = new Subject<void>();
+  private readonly _characterID = signal<string>('');
+  private readonly _destroy$ = inject(DestroyRef);
 
   ngOnInit(): void {
-    this._route.params.pipe(takeUntil(this._onDestroy$)).subscribe(params => {
-      this._characterID = params['id'];
+    this._route.params.pipe(takeUntilDestroyed(this._destroy$)).subscribe(params => {
+      this._characterID.set(params['id']);
     })
     this.getCharacterById();
   }
 
   getCharacterById(): void {
     this._loader.setLoading(true);
-    this._characterService.getCharByName(this._characterID).pipe(takeUntil(this._onDestroy$)).subscribe({
+    this._characterService.getCharByName(this._characterID())
+      .pipe(takeUntilDestroyed(this._destroy$))
+      .subscribe({
       next: (character: ICharacterModel) => {
         this._charData.triggerCharacterData(character)
         this._loader.setLoading(false);
@@ -49,9 +50,5 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
         this._loader.setLoading(false);
       }
     })
-  }
-
-  ngOnDestroy(): void {
-    this._onDestroy$.next();
   }
 }

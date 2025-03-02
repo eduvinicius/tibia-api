@@ -1,16 +1,21 @@
-<section class="world">
-  <app-loader class="world-loader" *ngIf="isLoading"></app-loader>
-  <!-- <div class="world-card" *ngIf="worldDetails">
-    <h1>Nome: {{ worldDetails.world.name }}</h1>
-    <p>Jogadores Online: {{ worldDetails.world.players_online }}</p>
-    <p>Recorde de jogadores online: {{ worldDetails.world.record_players }}</p>
-    <p>Data de criação: {{ formatData(worldDetails.world.creation_date) }}</p>
-    <p>Localidade: {{ worldDetails.world.location }}</p>
-    <p>Tipo de PVP: {{ worldDetails.world.pvp_type }}</p>
-    <div class="world-card-quests">
-      <h3>Títulos de Quest:</h3>
-      <p class="world-card-quests-list">{{ formatArray(worldDetails.world.world_quest_titles) }}</p>
+<section class="flex flex-col justify-center items-center gap-3">
+  @if (isLoading()) {
+    <app-loader class="world-loader"></app-loader>
+  }
+
+  @if (worldDetails(); as worldDetails) {
+    <div class="flex flex-col items-center justify-center gap-1">
+      <h1>Nome: {{ worldDetails.world.name }}</h1>
+      <p>Jogadores Online: {{ worldDetails.world.players_online }}</p>
+      <p>Recorde de jogadores online: {{ worldDetails.world.record_players }}</p>
+      <p>Data de criação: {{ formatData(worldDetails.world.creation_date) }}</p>
+      <p>Localidade: {{ worldDetails.world.location }}</p>
+      <p>Tipo de PVP: {{ worldDetails.world.pvp_type }}</p>
+      <div class="flex flex-col flex-wrap justify-center items-center mt-2">
+        <h3 class="text-2xl text-primary">Títulos de Quest:</h3>
+        <p class="world-card-quests-list">{{ formatArray(worldDetails.world.world_quest_titles) }}</p>
+      </div>
     </div>
-  </div> -->
-  <app-online-players-table [worldDetails]="worldDetails"></app-online-players-table>
+    <app-online-players-table [worldDetails]="worldDetails"></app-online-players-table>
+  }
 </section>

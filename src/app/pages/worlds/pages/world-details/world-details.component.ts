@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WorldsService } from '../../services/worlds.service';
-import { IWorldDetails, IWorldsDetails } from '../../interfaces/IWorldDetails';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { WorldsService } from 'src/app/shared/services/api/worlds.service';
+
+import { IWorldDetails} from '../../interfaces/IWorldDetails';
+
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { OnlinePlayersTableComponent } from '../../components/online-players-table/online-players-table.component';
+
+import { formatArray } from 'src/app/shared/utils/format-arrays';
+import { formatData } from 'src/app/shared/utils/format-data';
 
 @Component({
     selector: 'app-world-details',
@@ -15,42 +22,41 @@ import { OnlinePlayersTableComponent } from '../../components/online-players-tab
 
 export class WorldDetailsComponent implements OnInit {
 
+  private readonly _destroyRef = inject(DestroyRef);
+
+  public world = signal<string | null>(null);
+  public worldDetails = signal<IWorldDetails | null>(null);
+  public isLoading = signal<boolean>(false);
+
+  public formatArray = formatArray;
+  public formatData = formatData;
+
   constructor(
-    private route: ActivatedRoute,
-    private worldService: WorldsService
+    private readonly _route: ActivatedRoute,
+    private readonly _worldService: WorldsService
   ) {}
 
-  world: string = '';
-  worldDetails: IWorldDetails | undefined;
-  isLoading: boolean | undefined;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.world = params['id']
+    this._route.params.subscribe(params => {
+      this.world.set(params['id'])
     })
     this.fetchWorldData()
   };
 
-  fetchWorldData() {
-    this.isLoading = true;
-    this.worldService.getWorldByName(this.world).subscribe({
-      next: (data: IWorldsDetails) => {
-        this.worldDetails = data.worlds;
-        this.isLoading = false;
+  fetchWorldData(): void {
+    this.isLoading.set(true);
+    this._worldService.getWorldByName(this.world() ?? '')
+    .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+      next: (data: IWorldDetails) => {
+        this.worldDetails.set(data);
+        this.isLoading.set(false);
       },
       error: (error) => {
         console.log(error);
-        this.isLoading = false;
+        this.isLoading.set(false);
       }
     });
-  };
-
-  formatArray(arr: string[]): string {
-    return arr.join(', ')
-  };
-
-  formatData(date: string): string {
-    const newDate = new Date(date);
-    return newDate.toLocaleDateString('pt-BR')
   };
 }
