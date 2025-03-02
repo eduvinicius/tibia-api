@@ -1,10 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
-@import "tailwindcss";
+@import 'tailwindcss';
+@import './css/webkits.css';
+@import './css/btn.css';
+@import './css/input.css';
+@import './css/table.css';
+
+@theme {
+
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --color-primary: #5a2800;
+  --color-secondary: #D2691E;
+  --color-tertiary: #debb9d;
+  --color-success: #27AE60;
+  --color-warning: #F39C12;
+  --color-error: #C0392B;
+  --color-info: #3498DB;
+  --color-light: #F8F9FA;
+  --color-dark: #2C3E50;
+
+  --bg-body: var(--color-light);
+  --bg-card: #FFFFFF;
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-color: #E0E0E0;
+
+  --shadow-sm: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.2);
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  --transition-fast: 0.2s ease-in-out;
+  --transition-medium: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+}
 
 * {
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
   list-style: none;
 }
 
@@ -15,26 +56,10 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: #5a2800;
+  @apply text-primary cursor-pointer decoration-0 hover:text-secondary;
   transition: .3s;
-
-  &:hover {
-    color: #D2691E;
-  }
 }
 
-
-::-webkit-scrollbar {
-  width: 8px;
-/*
-  &-thumb {
-    background-color: #5a2800;
-    border-radius: 4px;
-  }
-
-  &-track {
-    background-color: #f1f1f1;
-  } */
+img {
+  transition: .3s;
 }
-

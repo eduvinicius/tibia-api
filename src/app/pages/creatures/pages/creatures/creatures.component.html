@@ -1,0 +1,28 @@
+<section class="flex flex-col justify-center items-center gap-2">
+    <h1 class="text-2xl font-700">Lista de Criaturas</h1>
+    <p>
+      Nesta seção você pode conferir todas as criaturas disponíveis no Tibia.
+      Caso queira procurar uma criatura específica pelo nome,
+      <a
+        routerLink="/criaturas/pesquisa"
+        class="font-700"
+        >
+        Clique aqui!
+      </a>
+    </p>
+    <p>
+      Caso queira visualizar uma lista de bosses,
+      <a routerLink="/criaturas/bosses" class="font-700">Clique aqui!</a>
+    </p>
+    <p>Número de criaturas na lista: {{ (visibleCreatures()).length }}</p>
+
+    @if (loaderService.loading()) {
+      <app-loader></app-loader>
+    } @else {
+      <app-creatures-list
+        [visibleCreatures]="visibleCreatures()"
+      >
+      </app-creatures-list>
+      <app-button [btnTitle]="btnTitle()" (click)="loadNextPageOfCreatures()"></app-button>
+    }
+</section>

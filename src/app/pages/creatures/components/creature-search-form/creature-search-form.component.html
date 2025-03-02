@@ -1,0 +1,31 @@
+<section>
+  <form [formGroup]="creatureFormService.creatureForm" (ngSubmit)="submitForm()"
+    class="flex gap-3 items-center"
+    #formDir="ngForm">
+    <input
+      type="text"
+      class="tibia-input"
+      placeholder="Pesquise a criatura"
+      id="search"
+      name="search"
+      formControlName="creatureName"
+    >
+    <button
+      type="submit"
+      class="tibia-btn">
+      Pesquisar
+    </button>
+  </form>
+
+  @if (
+    creatureFormService.creatureName.invalid &&
+    formDir.submitted &&
+    (creatureFormValidation()) &&
+    creatureFormService.creatureName.errors?.['required']
+    ) {
+    <span class="text-error">O nome da criatura é obrigatório!</span>
+  }
+
+</section>
+
+

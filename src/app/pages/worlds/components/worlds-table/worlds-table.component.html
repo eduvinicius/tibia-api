@@ -1,0 +1,39 @@
+@if (isLoading()) {
+  <app-loader class="loader"></app-loader>
+} @else if (worlds() && !isLoading()) {
+  <h1 class="text-2xl text-primary text-center w-full mb-2">Mundos</h1>
+  <section class="h-screen overflow-y-auto pr-4">
+    <table class="tibia-table">
+      <tbody class="tibia-table-body">
+        <tr class="world-table-body-head">
+          <th>Nome</th>
+          <th>Jogadores Online</th>
+          <th>Localidade</th>
+          <th>Tipo de PVP</th>
+          <th>Status</th>
+        </tr>
+        @for (world of worlds(); track $index) {
+          <tr>
+            <td>
+              <a routerLink="/mundos/detalhes/{{ world.name }}">
+                {{ world.name }}
+              </a>
+            </td>
+            <td >{{ world.players_online }}</td>
+            <td >{{ world.location }}</td>
+            <td >{{ world.pvp_type }}</td>
+            <td
+              [ngClass]="{
+                'text-success': world.status === 'online',
+                'text-danger': world.status === 'offline'
+              }"
+              >
+              {{ world.status }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+}
+

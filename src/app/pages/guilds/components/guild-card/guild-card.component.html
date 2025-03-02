@@ -1,0 +1,22 @@
+@if (guildFormService.guildData(); as guild) {
+  <div class="flex flex-col items-center justify-center gap-4">
+    <div class="flex flex-col justify-center items-center gap-2 bg-tertiary text-primary w-80 p-8 mt-8 rounded-2xl">
+      <img src="{{ guild?.logoUrl }}" alt="logo da guilda" class="w-24 mx-auto">
+      <h3>{{ guild?.name }}</h3>
+      <h4>Mundo: {{ guild?.world }}</h4>
+      <h4 class="">Descrição:</h4>
+      <div class="text-left overflow-y-auto h-30 p-2 my-3">
+        <p>
+          {{ guild?.description }}
+        </p>
+      </div>
+      <p>Data de Criação: {{ guild?.founded | date: 'dd/MM/yyyy' }} </p>
+      <p>Jogadores Online: {{ guild?.playersOnline }} </p>
+      <p>Jogadores Offline: {{ guild?.playersOffline }} </p>
+      <p>Total de membros: {{ guild?.totalMembers }} </p>
+    </div>
+    <app-guild-member-card [members]="guild?.members"></app-guild-member-card>
+  </div>
+}
+
+
