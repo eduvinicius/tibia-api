@@ -1,0 +1,43 @@
+#core-container {
+  height: 100vh;
+  display: grid;
+  grid-template-areas:
+  "header header header"
+  "aside main main"
+  "aside footer footer";
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: 5.5rem auto auto;
+}
+
+#core-container > header {
+  grid-area: header;
+}
+
+#core-container > aside {
+  grid-area: aside;
+  grid-row: 2 / 4;
+  background-image: url('../../../assets/images/tibiabackgroundsite.gif');
+  background-size: cover;
+}
+
+#core-container > footer {
+  grid-area: footer;
+  height: 100%;
+}
+
+#core-container > main {
+  grid-area: main;
+  width: 100%;
+  height: auto;
+  background-color: #e2e8f0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  background-image: url('../../../assets/images/tibiabackgroundsite.gif');
+  background-size: cover;
+}
+
+.main-content {
+  grid-column: span 12;
+  padding: 20px 16px;
+  position: relative;
+}

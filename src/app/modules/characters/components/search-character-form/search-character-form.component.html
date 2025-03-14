@@ -1,0 +1,29 @@
+<form
+  [formGroup]="charForm.characterForm"
+  class="flex gap-3 items-center"
+  (ngSubmit)="submitForm()"
+  #formDir="ngForm">
+  <input
+    type="text"
+    class="tibia-input"
+    placeholder="Digite o nome"
+    id="search"
+    name="search"
+    formControlName="charName"
+  >
+
+  <button
+    type="submit"
+    class="tibia-btn">
+    Pesquisar
+  </button>
+</form>
+  @if (
+    charForm.charName.invalid &&
+    formDir.submitted &&
+    (charForm.charFormValidation()) &&
+    charForm.charName.errors?.['required']) {
+    <div class="text-error">
+      <span>O nome do personagem é obrigatório!</span>
+    </div>
+  }

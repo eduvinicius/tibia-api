@@ -1,0 +1,26 @@
+@if (worldDetails(); as worldDetails) {
+  <h1 class="text-2xl text-primary text-center w-full mb-2">Jogadores Online</h1>
+  <section class="h-screen overflow-y-auto pr-4">
+    <table class="tibia-table">
+      <tbody class="tibia-table-body">
+        <tr>
+          <th>Nome</th>
+          <th>Nível</th>
+          <th>Vocação</th>
+        </tr>
+        @for (character of worldDetails.world.online_players; track $index) {
+          <tr>
+            <td>
+              <a routerLink="/personagens/detalhes/{{ character.name }}">
+                {{ character.name }}
+              </a>
+            </td>
+            <td>{{ character.level }}</td>
+            <td>{{ character.vocation }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+}
+
