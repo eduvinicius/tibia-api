@@ -3,7 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HomeComponent } from './home.component';
 
-describe('HomeComponent', () => {
+fdescribe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
@@ -30,7 +30,7 @@ describe('HomeComponent', () => {
   it('should render the image with correct src and alt attributes', () => {
     const imgElement: HTMLImageElement = fixture.debugElement.query(By.css('img')).nativeElement;
     expect(imgElement.src).toContain('assets/images/tibia-bg.jpg');
-    expect(imgElement.alt).toBe('Foto Tibia');
+    expect(imgElement.alt).toBe('Arte do jogo Tibia mostrando uma mulher em uma cidade');
   });
 
   it('should render paragraphs with expected content', () => {

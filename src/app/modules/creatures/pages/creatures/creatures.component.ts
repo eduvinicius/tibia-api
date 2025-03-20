@@ -13,7 +13,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
     selector: 'app-creatures',
     templateUrl: './creatures.component.html',
-    styleUrls: ['./creatures.component.css'],
     standalone: true,
     imports: [LoaderComponent, CreaturesListComponent, ButtonComponent, RouterLink]
 })
@@ -25,18 +24,18 @@ export class CreaturesComponent implements OnInit {
       public loaderService: LoaderService
     ) {}
 
-    private readonly _creaturesList = signal<ICreaturesListModel[]>([]);
+    public readonly creaturesList = signal<ICreaturesListModel[]>([]);
     private readonly _chunkSize: number = 10;
     private readonly _currentPage = signal<number>(1);
     private readonly _destroyRef = inject(DestroyRef);
 
     public btnTitle = signal<string>('Ver mais');
 
-    public visibleCreatures = computed(() => {
-      const startIndex = 0;
-      const endIndex = this._currentPage() * this._chunkSize;
-      return this._creaturesList().slice(startIndex, endIndex);
-    });
+    // public visibleCreatures = computed(() => {
+    //   const startIndex = 0;
+    //   const endIndex = this._currentPage() * this._chunkSize;
+    //   return this.creaturesList().slice(startIndex, endIndex);
+    // });
 
     ngOnInit(): void {
       this.getCreaturesListData();
@@ -48,7 +47,7 @@ export class CreaturesComponent implements OnInit {
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe({
           next: (creaturesData: ICreaturesListModel[]) => {
-            this._creaturesList.set(creaturesData);
+            this.creaturesList.set(creaturesData);
             this.loaderService.setLoading(false);
           },
           error: (error: Error) => {
@@ -58,9 +57,9 @@ export class CreaturesComponent implements OnInit {
         });
     };
 
-    loadNextPageOfCreatures(): void {
-      if (this._currentPage() * this._chunkSize < this._creaturesList().length) {
-        this._currentPage.set(this._currentPage() + 1);
-      }
-    }
+    // loadNextPageOfCreatures(): void {
+    //   if (this._currentPage() * this._chunkSize < this._creaturesList().length) {
+    //     this._currentPage.set(this._currentPage() + 1);
+    //   }
+    // }
 }

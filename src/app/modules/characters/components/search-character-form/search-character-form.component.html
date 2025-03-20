@@ -1,7 +1,7 @@
 <form
   [formGroup]="charForm.characterForm"
   class="flex gap-3 items-center"
-  (ngSubmit)="submitForm()"
+  (ngSubmit)="submitForm(formDir)"
   #formDir="ngForm">
   <input
     type="text"
@@ -17,13 +17,14 @@
     class="tibia-btn">
     Pesquisar
   </button>
+
 </form>
-  @if (
-    charForm.charName.invalid &&
-    formDir.submitted &&
-    (charForm.charFormValidation()) &&
-    charForm.charName.errors?.['required']) {
-    <div class="text-error">
-      <span>O nome do personagem é obrigatório!</span>
-    </div>
-  }
+
+@if (
+  charForm.charName.invalid &&
+  formDir.submitted &&
+  charForm.charName.errors?.['required']) {
+  <div class="text-error">
+    <span>O nome do personagem é obrigatório!</span>
+  </div>
+}

@@ -1,6 +1,12 @@
-<section class="flex flex-wrap justify-center items-center w-[80%] m-auto h-[400px] overflow-auto">
+<section
+  appVirtualScroll
+  [items]="creatures() ?? []"
+  [itemHeight]="50"
+  [containerHeight]="400"
+  (visibleItemsChange)="updateVisibleCreatures($event)"
+  class="flex flex-wrap justify-center items-center w-[80%] m-auto h-[450px] overflow-y-auto">
 
-  @if (visibleCreatures()) {
+  @if (visibleCreatures().length) {
 
     @for (creature of visibleCreatures(); track $index) {
       <div class="w-[15%] h-24 m-4 rounded-2xl text-center ease-in-out transform hover:scale-105">

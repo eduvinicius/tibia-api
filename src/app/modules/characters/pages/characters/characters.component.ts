@@ -5,7 +5,6 @@ import { CharacterTableComponent } from '../../components/character-table/charac
 @Component({
     selector: 'app-characters',
     templateUrl: './characters.component.html',
-    styleUrls: ['./characters.component.css'],
     standalone: true,
     imports: [SearchCharacterFormComponent, CharacterTableComponent],
 })

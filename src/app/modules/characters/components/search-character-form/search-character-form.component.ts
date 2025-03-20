@@ -1,5 +1,5 @@
-import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, DestroyRef, inject} from '@angular/core';
+import { FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CharacterFormService } from '../../services/character-form.service';
@@ -20,29 +20,19 @@ import { ICharForm } from '../../interfaces/ICharForm';
 export class SearchCharacterFormComponent {
 
   private readonly _destroyRef = inject(DestroyRef);
-  private timeoutId: ReturnType<typeof setTimeout> | null = null;
-
-  timeoutDuration = signal<number | null>(null);
 
   constructor(
     private readonly _characterService: CharactersService,
     private readonly _loader: LoaderService,
     public charForm: CharacterFormService
-    ) {
+    ) {}
 
-    this.injectTimeoutEffect();
-    }
-
-  submitForm(): void {
-
+  submitForm(formDirective: FormGroupDirective): void {
     if (this.charForm.characterForm.valid) {
       this._loader.setLoading(true);
       this._handleCharacterData();
-      return
+      formDirective.resetForm();
     }
-
-    this.charForm.charFormValidation.set(true);
-    this.handleTimeout(3000);
   };
 
   private _handleCharacterData(): void {
@@ -53,6 +43,7 @@ export class SearchCharacterFormComponent {
       next: (character: ICharacterModel) => {
         this.charForm.triggerCharacterData(character)
         this._loader.setLoading(false);
+
       },
       error: (error) => {
         console.log(error)
@@ -61,22 +52,5 @@ export class SearchCharacterFormComponent {
       }
     });
     this.charForm.characterForm.reset();
-    this.handleTimeout(3000);
-  }
-
-  public handleTimeout(time: number): void {
-    this.timeoutDuration.set(time);
-  }
-
-  public injectTimeoutEffect(): void {
-    effect(() => {
-      const duration = this.timeoutDuration();
-      if (duration === null) return;
-      this.timeoutId = setTimeout(() => {
-        this.charForm.charFormValidation.set(false)
-        this.timeoutDuration.set(null);
-      }, duration);
-      return () => clearTimeout(this.timeoutId ?? 0);
-    });
   }
 }

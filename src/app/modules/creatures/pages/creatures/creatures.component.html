@@ -1,6 +1,9 @@
 <section class="flex flex-col justify-center items-center gap-2">
+  <header>
     <h1 class="text-2xl font-700">Lista de Criaturas</h1>
-    <p>
+  </header>
+  <article class="flex flex-col justify-center items-center gap-2">
+    <h2>
       Nesta seção você pode conferir todas as criaturas disponíveis no Tibia.
       Caso queira procurar uma criatura específica pelo nome,
       <a
@@ -9,20 +12,21 @@
         >
         Clique aqui!
       </a>
-    </p>
+    </h2>
     <p>
       Caso queira visualizar uma lista de bosses,
       <a routerLink="/criaturas/bosses" class="font-700">Clique aqui!</a>
     </p>
-    <p>Número de criaturas na lista: {{ (visibleCreatures()).length }}</p>
+    <p>Número de criaturas na lista: {{ (creaturesList()).length }}</p>
 
     @if (loaderService.loading()) {
       <app-loader></app-loader>
     } @else {
       <app-creatures-list
-        [visibleCreatures]="visibleCreatures()"
+        [creatures]="creaturesList()"
       >
       </app-creatures-list>
-      <app-button [btnTitle]="btnTitle()" (click)="loadNextPageOfCreatures()"></app-button>
+      <!-- <app-button [btnTitle]="btnTitle()" (click)="loadNextPageOfCreatures()"></app-button> -->
     }
+  </article>
 </section>
