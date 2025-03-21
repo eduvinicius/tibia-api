@@ -1,20 +1,18 @@
-import { Component, input, signal } from '@angular/core';
+import {  ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
-import { VirtualScrollDirective } from 'src/app/shared/directives/virtualscroll.directive';
+
 @Component({
     selector: 'app-creatures-list',
     templateUrl: './creatures-list.component.html',
     styleUrls: ['./creatures-list.component.css'],
     standalone: true,
-    imports: [RouterModule, VirtualScrollDirective]
+    imports: [RouterModule, ScrollingModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class CreaturesListComponent {
   creatures = input<ICreaturesListModel[] | null>([]);
-  visibleCreatures = signal<ICreaturesListModel[]>([]);
-
-  updateVisibleCreatures(items: ICreaturesListModel[]) {
-    this.visibleCreatures.set(items);
-  }
 }

@@ -23,10 +23,10 @@
       <app-loader></app-loader>
     } @else {
       <app-creatures-list
+        class="w-full"
         [creatures]="creaturesList()"
       >
       </app-creatures-list>
-      <!-- <app-button [btnTitle]="btnTitle()" (click)="loadNextPageOfCreatures()"></app-button> -->
     }
   </article>
 </section>

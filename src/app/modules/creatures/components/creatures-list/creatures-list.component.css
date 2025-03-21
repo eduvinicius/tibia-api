@@ -1,0 +1,20 @@
+.creature-viewport {
+  height: 500px;
+  width: 85%;
+  margin: auto;
+}
+
+.creature-item {
+  max-width: 70px;
+  height: 50px;
+}
+
+.cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  height: 150%;
+  justify-content: center;
+  align-items: center;
+  column-gap: 6rem;
+  row-gap: 4rem;
+}

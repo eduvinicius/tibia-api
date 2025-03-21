@@ -1,26 +1,15 @@
-<section
-  appVirtualScroll
-  [items]="creatures() ?? []"
-  [itemHeight]="50"
-  [containerHeight]="400"
-  (visibleItemsChange)="updateVisibleCreatures($event)"
-  class="flex flex-wrap justify-center items-center w-[80%] m-auto h-[450px] overflow-y-auto">
-
-  @if (visibleCreatures().length) {
-
-    @for (creature of visibleCreatures(); track $index) {
-      <div class="w-[15%] h-24 m-4 rounded-2xl text-center ease-in-out transform hover:scale-105">
+<section class="w-full">
+  <cdk-virtual-scroll-viewport
+    itemSize="20"
+    class="creature-viewport">
+      <div *cdkVirtualFor="let creature of creatures()" class="creature-item ">
         <a
           routerLink="/criaturas/detalhes/{{ creature?.race }}"
-          class="flex flex-col justify-center items-center">
+          class="flex flex-col justify-center items-center w-full"
+          [title]="creature?.name">
           <img [src]="creature?.image" alt="Criatura" class="w-16">
-          <p class="text-center text-sm font-700 text-primary">{{ creature?.name }}</p>
+          <p class="w-full text-center text-sm font-700 text-primary truncate">{{ creature?.name }}</p>
         </a>
       </div>
-    }
-
-  } @else {
-    <p class="text-center text-primary">Nenhuma criatura encontrada</p>
-  }
-
+  </cdk-virtual-scroll-viewport>
 </section>

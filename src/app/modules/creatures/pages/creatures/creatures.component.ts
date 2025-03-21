@@ -1,5 +1,6 @@
 import { RouterLink } from '@angular/router';
-import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ICreaturesListModel } from '../../interfaces/ICreaturesList';
 
@@ -8,13 +9,12 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { CreaturesListComponent } from '../../components/creatures-list/creatures-list.component';
-import { ButtonComponent } from '../../components/button/button.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 @Component({
     selector: 'app-creatures',
     templateUrl: './creatures.component.html',
     standalone: true,
-    imports: [LoaderComponent, CreaturesListComponent, ButtonComponent, RouterLink]
+    imports: [LoaderComponent, CreaturesListComponent, RouterLink]
 })
 
 export class CreaturesComponent implements OnInit {
