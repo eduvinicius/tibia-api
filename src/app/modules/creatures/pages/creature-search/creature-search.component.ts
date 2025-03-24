@@ -6,12 +6,8 @@ import { CreatureCardComponent } from '../../components/creature-card/creature-c
 @Component({
     selector: 'app-creature-search',
     templateUrl: './creature-search.component.html',
-    styleUrls: ['./creature-search.component.css'],
     standalone: true,
     imports: [CreatureSearchFormComponent, CreatureCardComponent]
 })
 
-export class CreatureSearchComponent  {
-
-  constructor() {}
-}
+export class CreatureSearchComponent  {}

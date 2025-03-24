@@ -2,10 +2,10 @@
   <cdk-virtual-scroll-viewport
     itemSize="20"
     class="creature-viewport">
-      <div *cdkVirtualFor="let creature of creatures()" class="creature-item ">
+      <div *cdkVirtualFor="let creature of creatures()" class="creature-item">
         <a
           routerLink="/criaturas/detalhes/{{ creature?.race }}"
-          class="flex flex-col justify-center items-center w-full"
+          class="flex flex-col justify-center items-center w-full hover:scale-110 transition-transform duration-300"
           [title]="creature?.name">
           <img [src]="creature?.image" alt="Criatura" class="w-16">
           <p class="w-full text-center text-sm font-700 text-primary truncate">{{ creature?.name }}</p>
